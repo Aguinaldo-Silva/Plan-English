@@ -2,172 +2,220 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-/yOfGL42I2UczqxheI7qmcITlla8Nl0c5iGeGTdKJc0=' https://cdn.jsdelivr.net; connect-src https://*.supabase.co wss://*.supabase.co; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guia diário de inglês</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#EDF3F4; --surface:#FFFFFF; --surface-2:#F4F8F9; --ink:#10232F; --muted:#4F6B7A;
-  --line:#D2DEE2; --sea:#0D6B77; --sea-soft:#D6ECEE; --sun:#E9A21F; --sun-soft:#FCEFD2; --sun-ink:#5A3A00;
-  --half:#8FC7CE; --focus:#0D6B77;
+  --bg:#F3F5F9; --surface:#FFFFFF; --surface-2:#F7F9FC; --ink:#141B2D; --muted:#5D6A85; --line:#DEE3EC;
+  --primary:#2457D6; --primary-ink:#FFFFFF; --primary-soft:#E7EEFF;
+  --done:#168A5A; --done-ink:#0E5C3C; --done-soft:#DCF3E8; --half:#9ED5BD;
+  --danger:#C2410C; --danger-soft:#FEE9DF;
+  --navy:#101A33; --navy-2:#1B2B55;
+  --sea:var(--primary); --sea-soft:var(--primary-soft); --sun:var(--done); --sun-soft:var(--done-soft); --sun-ink:var(--done-ink); --focus:var(--primary);
+  --shadow:0 1px 2px rgba(20,27,45,.06),0 8px 24px -12px rgba(20,27,45,.18);
+  --r:14px;
   color-scheme:light; box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
-  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --display:"Sora","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0D171D;--surface:#14232B;--surface-2:#192C35;--ink:#E4EEF1;--muted:#9AB4C0;--line:#26404B;--sea:#5CC4CE;--sea-soft:#163C43;--sun:#F4BC4B;--sun-soft:#3A2E12;--sun-ink:#FBE3B0;--half:#2E6C74;--focus:#5CC4CE;color-scheme:dark}
+  :root:not([data-theme="light"]){--bg:#0F1420;--surface:#171E2E;--surface-2:#1D2638;--ink:#E7EBF3;--muted:#9AA5BC;--line:#2A3448;--primary:#7A9EFF;--primary-ink:#0F1420;--primary-soft:#1E2B4D;--done:#3DCB8A;--done-ink:#BDEFD6;--done-soft:#153826;--half:#2A6B4E;--danger:#F59E7E;--danger-soft:#3A2218;--navy:#0B1226;--navy-2:#16214A;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);color-scheme:dark}
 }
-:root[data-theme="dark"]{--bg:#0D171D;--surface:#14232B;--surface-2:#192C35;--ink:#E4EEF1;--muted:#9AB4C0;--line:#26404B;--sea:#5CC4CE;--sea-soft:#163C43;--sun:#F4BC4B;--sun-soft:#3A2E12;--sun-ink:#FBE3B0;--half:#2E6C74;--focus:#5CC4CE;color-scheme:dark}
+:root[data-theme="dark"]{--bg:#0F1420;--surface:#171E2E;--surface-2:#1D2638;--ink:#E7EBF3;--muted:#9AA5BC;--line:#2A3448;--primary:#7A9EFF;--primary-ink:#0F1420;--primary-soft:#1E2B4D;--done:#3DCB8A;--done-ink:#BDEFD6;--done-soft:#153826;--half:#2A6B4E;--danger:#F59E7E;--danger-soft:#3A2218;--navy:#0B1226;--navy-2:#16214A;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);color-scheme:dark}
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:var(--surface)}
 button,input,select,textarea{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
-.wrap{max-width:1040px;margin:0 auto;padding:22px 18px 64px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.2vw,34px);line-height:1.08;letter-spacing:-.015em;margin:0 0 4px}
-.lead{margin:0;color:var(--muted);font-size:15px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
+a{color:var(--primary)}
+.hidden{display:none!important}
+#app{min-height:100%;display:flex;flex-direction:column}
+#app>.wrap{width:100%}
 
-/* top stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 6px}
-@media (max-width:560px){.stats{grid-template-columns:1fr 1fr;gap:6px}}
-.st{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}
-.st b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(22px,4vw,30px);line-height:1}
-.st span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
-.goalbar{margin:10px 0 0}
-.goalbar .lbl{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);margin-bottom:5px}
-.goalbar .lbl b{color:var(--ink)}
-.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;position:relative}
-.bar i{display:block;height:100%;background:var(--sea);border-radius:5px;transition:width .5s ease}
-.bar i.sun{background:var(--sun)}
-.sync{font-size:12.5px;color:var(--muted);margin:8px 0 0}
-
-/* nav */
-.tabs{display:flex;gap:6px;overflow-x:auto;margin:18px 0 20px;padding-bottom:4px;scrollbar-width:none}
+/* ---------- app bar ---------- */
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+.appbar .in{max-width:1040px;margin:0 auto;padding:0 18px;height:60px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+.brand i{width:30px;height:30px;border-radius:9px;background:var(--primary);display:grid;place-items:center;color:var(--primary-ink);font-style:normal;font-size:15px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:700;font-size:15px}
-.tab[aria-current="page"]{background:var(--sea);border-color:var(--sea);color:var(--surface)}
+.tab{flex:none;border:0;background:transparent;border-radius:9px;padding:8px 12px;cursor:pointer;font-weight:600;font-size:14.5px;color:var(--muted)}
+.tab:hover{background:var(--surface-2);color:var(--ink)}
+.tab[aria-current="page"]{background:var(--primary-soft);color:var(--primary)}
+.user{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);white-space:nowrap}
+.user b{max-width:160px;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:bottom;font-weight:600;color:var(--ink)}
+.user button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:13px;font-weight:600}
+@media (max-width:760px){
+  .appbar .in{height:56px;flex-wrap:wrap;padding:0 12px}
+  .user b{display:none}
+  .tabs{order:3;width:100%;margin:0;padding:0 0 6px}
+  .appbar .in{height:auto;padding-top:8px}
+}
 
-/* day panel */
-.dayhead{margin:0 0 4px;font-family:var(--display);font-size:clamp(22px,3.6vw,30px);font-weight:800;line-height:1.1}
-.dayctx{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+/* ---------- layout ---------- */
+.wrap{max-width:1040px;margin:0 auto;padding:24px 18px 72px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(22px,3.6vw,30px);line-height:1.1;letter-spacing:-.02em;margin:0 0 4px}
+.lead{margin:0;color:var(--muted);font-size:14.5px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 10px}
+@media (max-width:560px){.stats{grid-template-columns:1fr 1fr;gap:8px}}
+.st{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0;box-shadow:var(--shadow)}
+.st b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(22px,4vw,28px);line-height:1;letter-spacing:-.02em}
+.st span{display:block;font-size:12.5px;color:var(--muted);margin-top:5px}
+.goalbar{margin:8px 0 0}
+.goalbar .lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:5px}
+.goalbar .lbl b{color:var(--ink)}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--primary);border-radius:4px;transition:width .5s ease}
+.bar i.sun{background:var(--done)}
+.sync{font-size:12.5px;color:var(--muted);margin:10px 0 0;display:flex;align-items:center;gap:6px}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.sync.ok::before{background:var(--done)}
+.sync.bad::before{background:var(--danger)}
+
+/* ---------- day panel ---------- */
+.dayhead{margin:22px 0 2px;font-family:var(--display);font-size:clamp(22px,3.4vw,28px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.dayctx{color:var(--muted);font-size:14px;margin:0 0 14px}
 .dayctx b{color:var(--ink)}
-.epi{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--sea);border-radius:12px;padding:12px 16px;margin:0 0 16px}
-.epi h4{margin:0 0 4px;font-family:var(--display);font-size:17px}
-.epi p{margin:0;font-size:15px}
+.epi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px 14px 18px;margin:0 0 14px;position:relative;box-shadow:var(--shadow)}
+.epi::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:0 3px 3px 0;background:var(--primary)}
+.epi h4{margin:0 0 4px;font-family:var(--display);font-size:16px}
+.epi p{margin:0;font-size:14.5px}
 .epi p+p{margin-top:6px;color:var(--muted)}
 .status{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
-.pill{border-radius:999px;padding:5px 12px;font-size:13.5px;font-weight:700;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
-.pill.on{background:var(--sun-soft);border-color:var(--sun);color:var(--sun-ink)}
-.pill.full{background:var(--sea-soft);border-color:var(--sea);color:var(--ink)}
+.pill{border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.pill.on{background:var(--done-soft);border-color:transparent;color:var(--done-ink)}
 .grp{margin:0 0 18px}
-.grp h3{font-family:var(--display);font-size:18px;margin:0 0 8px;display:flex;align-items:baseline;gap:10px}
-.grp h3 small{font-family:var(--body);font-weight:400;color:var(--muted);font-size:14px}
-.task{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
-.task.done{background:var(--sun-soft);border-color:var(--sun)}
-.task input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--sun);cursor:pointer}
-.task .tt{display:block;font-weight:700;line-height:1.3}
-.task .td{display:block;font-size:14.5px;color:var(--muted);margin-top:3px}
-.task.done .td{color:var(--sun-ink)}
-.task .ta{display:block;font-size:13px;margin-top:6px;color:var(--sea);font-weight:700}
-.task .tm{text-align:right;font-family:var(--display);font-weight:800;font-size:18px;line-height:1;white-space:nowrap}
-.task .tm small{display:block;font-family:var(--body);font-weight:400;font-size:11.5px;color:var(--muted);margin-top:3px}
-.ankibox{background:var(--sea-soft);border-radius:12px;padding:12px 16px;margin:0 0 16px}
-.ankibox h4{margin:0 0 4px;font-family:var(--display);font-size:16px}
-.ankibox ul{margin:4px 0 0;padding-left:18px;font-size:15px}
-.note{font-size:14px;color:var(--muted)}
-.btn{border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;border:2px solid var(--sea);background:var(--sea);color:var(--surface)}
+.grp h3{font-family:var(--display);font-size:16px;margin:0 0 8px;display:flex;align-items:baseline;gap:10px}
+.grp h3 small{font-family:var(--body);font-weight:400;color:var(--muted);font-size:13px}
+.task{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
+.task:hover{border-color:var(--primary)}
+.task.done{background:var(--done-soft);border-color:transparent}
+.task input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--done);cursor:pointer}
+.task .tt{display:block;font-weight:600;line-height:1.35}
+.task .td{display:block;font-size:14px;color:var(--muted);margin-top:3px}
+.task.done .td{color:var(--done-ink)}
+.task .ta{display:block;font-size:12.5px;margin-top:6px;color:var(--primary);font-weight:600}
+.task .tm{text-align:right;font-family:var(--display);font-weight:800;font-size:17px;line-height:1;white-space:nowrap}
+.task .tm small{display:block;font-family:var(--body);font-weight:500;font-size:11px;color:var(--muted);margin-top:4px}
+.ankibox{background:var(--primary-soft);border-radius:var(--r);padding:12px 16px;margin:0 0 16px}
+.ankibox h4{margin:0 0 4px;font-family:var(--display);font-size:15px}
+.ankibox ul{margin:4px 0 0;padding-left:18px;font-size:14.5px}
+.note{font-size:13.5px;color:var(--muted)}
+.btn{border-radius:10px;padding:10px 16px;font-weight:600;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink)}
+.btn:hover{filter:brightness(1.05)}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn.sm{padding:6px 12px;font-size:14px}
+.btn.ghost:hover{background:var(--surface-2);filter:none}
+.btn.sm{padding:7px 12px;font-size:14px}
+.btn.wide{width:100%}
+.btn[disabled]{opacity:.6;cursor:default}
+.banner{border:1px solid var(--line);border-left:4px solid var(--primary)}
 
-/* calendar */
+/* ---------- calendar ---------- */
 .calhead{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
-.calhead h2{font-family:var(--display);font-size:22px;margin:0}
-@media (max-width:560px){.cell{height:56px;padding:4px 5px}.cell .n{font-size:13px}.cell .lb{font-size:9.5px}.calhead .btn{padding:6px 8px;font-size:13px}}
+.calhead h2{font-family:var(--display);font-size:20px;margin:0}
 .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
 .dow{text-align:center;font-size:12px;color:var(--muted);padding-bottom:4px}
-.cell{height:74px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:5px 6px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;text-align:left;min-width:0;position:relative}
+.cell{height:72px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 7px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;text-align:left;min-width:0;position:relative}
+.cell:hover{border-color:var(--primary)}
 .cell.out{opacity:.35;cursor:default}
 .cell.wk{background:var(--surface-2)}
-.cell.today{border-color:var(--sea);box-shadow:inset 0 0 0 1.5px var(--sea)}
-.cell.sel{outline:3px solid var(--sun);outline-offset:-3px}
-.cell .n{font-family:var(--display);font-weight:800;font-size:15px;line-height:1}
+.cell.today{border-color:var(--primary);box-shadow:inset 0 0 0 1.5px var(--primary)}
+.cell.sel{outline:3px solid var(--done);outline-offset:-3px}
+.cell .n{font-family:var(--display);font-weight:700;font-size:14px;line-height:1}
 .cell .lb{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cell .d{position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:transparent}
 .cell.min .d{background:var(--half)}
-.cell.full .d{background:var(--sun)}
-.cell.test .lb{color:var(--sea);font-weight:700}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);margin:10px 0 24px}
+.cell.full .d{background:var(--done)}
+.cell.test .lb{color:var(--primary);font-weight:700}
+@media (max-width:560px){.cell{height:56px;padding:4px 5px}.cell .n{font-size:13px}.cell .lb{font-size:9.5px}}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);margin:10px 0 20px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
 
-/* metas */
-.meta{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
-.meta.cur{border-color:var(--sea);box-shadow:inset 0 0 0 1px var(--sea)}
-.meta h3{font-family:var(--display);font-size:21px;margin:0 0 2px}
-.meta .ms{color:var(--muted);font-size:14px;margin:0 0 10px}
+/* ---------- metas ---------- */
+.meta{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.meta.cur{border-color:var(--primary)}
+.meta h3{font-family:var(--display);font-size:19px;margin:0 0 2px}
+.meta .ms{color:var(--muted);font-size:13.5px;margin:0 0 10px}
 .meta ul{margin:10px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
-.meta li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
-.meta li input{width:18px;height:18px;margin-top:3px;accent-color:var(--sun)}
+.meta li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.meta li input{width:18px;height:18px;margin-top:3px;accent-color:var(--done)}
 .quiz{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
 .q{margin:0 0 14px}
-.q p{margin:0 0 6px;font-weight:700}
-.q label{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;cursor:pointer;font-size:15px}
-.q label.ok{border-color:var(--sea);background:var(--sea-soft)}
-.q label.bad{border-color:#C0392B}
-.q .ex{font-size:14px;color:var(--muted);margin-top:4px}
-.prompt{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;white-space:pre-wrap}
+.q p{margin:0 0 6px;font-weight:600}
+.q label{display:block;padding:7px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;cursor:pointer;font-size:14.5px}
+.q label.ok{border-color:var(--done);background:var(--done-soft)}
+.q label.bad{border-color:var(--danger);background:var(--danger-soft)}
+.q .ex{font-size:13.5px;color:var(--muted);margin-top:4px}
+.prompt{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;white-space:pre-wrap}
 
-/* generic sections */
-h2.sec{font-family:var(--display);font-size:24px;margin:28px 0 10px}
-h3.sub{font-family:var(--display);font-size:18px;margin:20px 0 8px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+/* ---------- generic ---------- */
+h2.sec{font-family:var(--display);font-size:21px;margin:26px 0 10px;letter-spacing:-.01em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
 .card p{margin:0 0 8px}
 .card ol,.card ul{margin:6px 0 0;padding-left:20px}
 .card li{margin-bottom:6px}
-table{border-collapse:collapse;width:100%;font-size:14.5px}
+table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:var(--display);font-size:14px}
+th{font-family:var(--display);font-size:13px}
 .tablewrap{overflow-x:auto}
-textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--surface);resize:vertical}
-input[type=date],input[type=number]{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)}
+textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--surface);resize:vertical}
+input[type=date],input[type=number],input[type=text],input[type=url],input[type=email],input[type=password]{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);width:100%;max-width:100%}
+input[type=number]{width:110px}
+input[type=date]{width:auto}
+select{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row > input[type=text],.row > input[type=url],.row > input[type=email],.row > input[type=password]{flex:1 1 200px;width:auto}
 .kbd{font-family:var(--display);font-weight:700;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
-footer{margin-top:40px;color:var(--muted);font-size:13.5px}
-#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:90vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:20}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-weight:600;cursor:pointer}
+.toggle input{width:18px;height:18px;accent-color:var(--primary)}
+.lbl2{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+.lbl2 .note{font-weight:400}
+.msg{font-size:13.5px;color:var(--muted);min-height:1.2em}
+.msg.err{color:var(--danger)}
+footer{margin-top:40px;color:var(--muted);font-size:13px}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:90vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:20}
 #toast.on{opacity:1;transform:translate(-50%,0)}
-.banner{border-left:5px solid var(--sun)}
-.toggle{display:inline-flex;align-items:center;gap:8px;font-weight:700;cursor:pointer}.toggle input{width:18px;height:18px;accent-color:var(--sea)}
+
+/* ---------- auth screens ---------- */
+.auth{flex:1;display:grid;grid-template-columns:1.05fr 1fr}
+@media (max-width:820px){.auth{grid-template-columns:1fr}}
+.auth .side{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:clamp(28px,6vw,64px);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.auth .side .brand{color:#fff;font-size:18px}
+.auth .side .brand i{background:#fff;color:var(--navy)}
+.auth .side h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.2vw,44px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px}
+.auth .side p{margin:0;color:rgba(255,255,255,.78);max-width:46ch;font-size:15.5px}
+.auth .side ul{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+.auth .side li{display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.9);font-size:14.5px}
+.auth .side li::before{content:"";width:8px;height:8px;border-radius:50%;background:#7A9EFF;flex:none;margin-top:7px}
+.auth .side small{color:rgba(255,255,255,.55);font-size:12.5px}
+@media (max-width:820px){.auth .side{padding:28px 22px 24px}.auth .side ul{display:none}}
+.auth .pane{display:flex;align-items:center;justify-content:center;padding:clamp(20px,5vw,56px) 18px}
+.authcard{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:var(--shadow)}
+.authcard h3{font-family:var(--display);font-size:22px;margin:0 0 4px;letter-spacing:-.02em}
+.authcard .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+.authcard .lbl2{margin-top:12px}
+.authcard .btn{margin-top:16px}
+.authcard .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font-size:14px}
+.authcard .links button{background:none;border:0;padding:0;color:var(--primary);cursor:pointer;font-weight:600}
+.segs{display:flex;background:var(--surface-2);border-radius:10px;padding:3px;margin:0 0 6px}
+.segs button{flex:1;border:0;background:transparent;border-radius:8px;padding:8px;cursor:pointer;font-weight:600;color:var(--muted)}
+.segs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Guia diário de inglês</h1>
-    <p class="lead" id="lead"></p>
-    <div class="stats">
-      <div class="st"><b id="stStreak">0</b><span>dias seguidos</span></div>
-      <div class="st"><b id="stHours">0 h</b><span>de inglês acumuladas</span></div>
-      <div class="st"><b id="stDays">0</b><span>dias concluídos</span></div>
-      <div class="st"><b id="stCards">0</b><span>expressões no Anki</span></div>
-    </div>
-    <div class="goalbar"><div class="lbl"><span id="metaLbl">Meta 1</span><b id="metaPct">0%</b></div><div class="bar"><i id="metaBar" style="width:0%"></i></div></div>
-    <div class="goalbar"><div class="lbl"><span id="allLbl">Caminho até o B2 inicial</span><b id="allPct">0%</b></div><div class="bar"><i class="sun" id="allBar" style="width:0%"></i></div></div>
-    <p class="sync" id="sync">Carregando seu progresso…</p>
-  </header>
-  <nav class="tabs" id="tabs" aria-label="Seções">
-    <button class="tab" data-v="hoje" type="button">Hoje</button>
-    <button class="tab" data-v="calendario" type="button">Calendário</button>
-    <button class="tab" data-v="metas" type="button">Metas e testes</button>
-    <button class="tab" data-v="anki" type="button">Anki</button>
-    <button class="tab" data-v="metodo" type="button">Método</button>
-    <button class="tab" data-v="ajustes" type="button">Ajustes</button>
-  </nav>
-  <main id="view"></main>
-  <footer><p>Estimativas para o ritmo de 2 h/dia. Com 1 h/dia o caminho leva uns 20 meses em vez de 12; com 3 h, cerca de 9. O que decide é a constância, não um dia perfeito.</p></footer>
-</div>
+<div id="app"></div>
 <script>
 /* ---------- Preset: Stranger Things (cenas sugeridas) ---------- */
 const PRESETS = {
@@ -347,22 +395,44 @@ const VIEWS = ["hoje","calendario","metas","anki","metodo","ajustes"];
 /* ---------- Supabase (só na sua cópia hospedada) ----------
    Opção A: preencha url e key abaixo (a chave "anon public" do projeto; nunca a service_role).
    Opção B: deixe vazio e informe os dois em Ajustes, em cada aparelho (ficam salvos no navegador). */
-const SUPA_FILE = {url: "", key: "", requireLogin: false}; // requireLogin: true = a página só abre depois do login
-const SUPA_LIB = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js";
+const SUPA_FILE = {url: "", key: ""}; // opcional; com projeto configurado, o login é sempre obrigatório
+const SUPA_LIB = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js";
+const SUPA_SRI = "sha384-rwykjmWNwVxboyFmvK9OXN0wj9hnMHA2aAHtits54DuACyCq0M2PrSNxhRb+hvXT";
 function supaCfg(){ try { const c = JSON.parse(localStorage.getItem("guia-supa") || "null"); if (c && c.url && c.key) return c; } catch(e){} return SUPA_FILE.url && SUPA_FILE.key ? SUPA_FILE : null; }
-function gateActive(){ const c = supaCfg(); return !(window.claude && window.claude.use) && !!c && !!(c.requireLogin || SUPA_FILE.requireLogin) && !!sb && !sbUser; }
+function clearLocalProgress(){ state.days = {}; state.tests = {}; state.cando = {}; seeded = false; saveLocal(); }
+const inClaude = () => !!(window.claude && window.claude.use);
+let recovery = false, supaLoading = false, authTab = "in";
+function screen(){
+  if (inClaude()) return "app";
+  const c = supaCfg();
+  if (!c){ try { if (localStorage.getItem("guia-local") === "1") return "app"; } catch(e){} return "setup"; }
+  if (recovery) return "recovery";
+  if (!sb) return supaLoading ? "loading" : "app";
+  if (!sbUser) return "login";
+  return "app";
+}
 let sb = null, sbUser = null, sbChannel = null, sbSaveTimer = null, sbMsg = "";
-function loadScript(src){ return new Promise((res, rej) => { const el = document.createElement("script"); el.src = src; el.onload = res; el.onerror = rej; document.head.appendChild(el); }); }
+let authSub = null;
+const keepSession = () => { try { return localStorage.getItem("guia-keep") === "1"; } catch(e){ return false; } };
+function makeClient(c, keep){
+  if (authSub){ try { authSub.unsubscribe(); } catch(e){} authSub = null; }
+  sb = window.supabase.createClient(c.url, c.key, {auth:{persistSession: !!keep, autoRefreshToken: true, detectSessionInUrl: true}});
+  const r = sb.auth.onAuthStateChange((ev, sess) => { if (ev === "PASSWORD_RECOVERY"){ recovery = true; render(); return; } const u = sess ? sess.user : null; const changed = (u && u.id) !== (sbUser && sbUser.id); sbUser = u; if (changed){ if (sbUser) sbLoad(); else { unsubSb(); clearLocalProgress(); setSync("supa-out"); } render(); } });
+  authSub = r && r.data ? r.data.subscription : null;
+}
+const maskUrl = u => { try { const h = new URL(u).host; return h.slice(0, 4) + "…" + h.slice(-12); } catch(e){ return "projeto configurado"; } };
+function loadScript(src, sri){ return new Promise((res, rej) => { const el = document.createElement("script"); el.src = src; if (sri){ el.integrity = sri; el.crossOrigin = "anonymous"; } el.onload = res; el.onerror = rej; document.head.appendChild(el); }); }
 async function initSupabase(){
-  const c = supaCfg(); if (!c){ setSync("local"); return; }
-  try { await loadScript(SUPA_LIB); } catch(e){ setSync("local"); $("#sync").textContent = "Não consegui carregar a biblioteca do Supabase (sem internet?). Progresso salvo neste navegador."; return; }
+  const c = supaCfg(); if (!c){ setSync("local"); render(); return; }
+  supaLoading = true; render();
+  try { await loadScript(SUPA_LIB, SUPA_SRI); } catch(e){ supaLoading = false; sbMsg = "sem conexão com o Supabase"; setSync("err"); render(); return; }
+  supaLoading = false;
   try {
-    sb = window.supabase.createClient(c.url, c.key);
+    makeClient(c, keepSession());
     const { data } = await sb.auth.getSession(); sbUser = data && data.session ? data.session.user : null;
-    sb.auth.onAuthStateChange((ev, sess) => { const u = sess ? sess.user : null; const changed = (u && u.id) !== (sbUser && sbUser.id); sbUser = u; if (changed){ if (sbUser) sbLoad(); else { unsubSb(); setSync("local"); } render(); } });
     if (sbUser) sbLoad(); else { setSync("supa-out"); render(); }
     document.addEventListener("visibilitychange", () => { if (!document.hidden && sbUser) sbLoad(); });
-  } catch(e){ sb = null; setSync("local"); }
+  } catch(e){ sb = null; sbMsg = e.message || ""; setSync("err"); render(); }
 }
 async function sbLoad(){
   try{
@@ -388,13 +458,16 @@ const S = () => state.cfg.serieOn ? state.cfg.serie : "seus vídeos";
 const fill = (txt, m) => txt.replace(/\{S\}/g, S()).replace(/\{P\}/g, metaPart(state.cfg, m - 1, WEEKS()));
 
 function saveLocal(){ try { localStorage.setItem(LS, JSON.stringify(state)); } catch(e){} }
-function setSync(m){
-  $("#sync").textContent = m === "db" ? "Progresso e configuração salvos na sua conta: aparecem em qualquer aparelho." :
+let syncMode = "local";
+function syncText(){
+  const m = syncMode;
+  return m === "db" ? "Progresso e configuração salvos na sua conta: aparecem em qualquer aparelho." :
     m === "slow" ? "Ainda não consegui carregar seus dados da conta. Por enquanto, ficam salvos neste navegador." :
-    m === "supa" ? `Sincronizado pelo Supabase como ${sbUser ? sbUser.email : ""}: aparece em qualquer aparelho.` :
-    m === "supa-out" ? "Supabase configurado. Entre na sua conta em Ajustes para sincronizar entre aparelhos." :
-    m === "err" ? `Não consegui salvar na nuvem${sbMsg ? " (" + sbMsg + ")" : ""}. Ficou salvo neste navegador.` : "Progresso salvo neste navegador.";
+    m === "supa" ? `Sincronizado como ${sbUser ? sbUser.email : ""}: aparece em qualquer aparelho.` :
+    m === "supa-out" ? "Entre na sua conta para sincronizar entre aparelhos." :
+    m === "err" ? `Não consegui salvar na nuvem${sbMsg ? " (" + sbMsg + ")" : ""}. Ficou salvo neste navegador.` : "Progresso salvo só neste navegador.";
 }
+function setSync(m){ syncMode = m; const el = $("#sync"); if (el){ el.textContent = syncText(); el.className = "sync " + (m === "db" || m === "supa" ? "ok" : m === "err" || m === "slow" ? "bad" : ""); } }
 function persist(){
   saveLocal();
   if (!dbRef){ if (sb && sbUser) sbSave(); return; }
@@ -546,16 +619,55 @@ function stats(){
 function countDone(start, weekNums){ let c = 0; for (const n of weekNums) for (let i = 0; i < 7; i++) if (isDone(addDays(start, (n - 1) * 7 + i))) c++; return c; }
 
 /* ---------- render ---------- */
-function renderTop(){
+function shellHTML(){
   const s = stats(), c = state.cfg;
-  $("#lead").textContent = `${WEEKS().length} semanas · ${c.serieOn ? c.serie : "vídeos do seu barril"}${c.cursoOn ? " + " + c.curso : ""} · mínimo de 1 hora por dia, meta de 2 horas, fim de semana leve.`;
-  $("#stStreak").textContent = s.streak; $("#stHours").textContent = (Math.round(s.hours * 10) / 10).toLocaleString("pt-BR") + " h"; $("#stDays").textContent = s.done; $("#stCards").textContent = s.cards;
   const mp = Math.round(s.mDone / s.mTotal * 100), ap = Math.round(s.done / s.total * 100);
-  $("#metaLbl").textContent = `Meta ${s.curMeta} · ${METAS[s.curMeta - 1].nome} · ${s.mDone} de ${s.mTotal} dias`;
-  $("#metaPct").textContent = mp + "%"; $("#metaBar").style.width = mp + "%";
-  $("#allLbl").textContent = `Caminho até o B2 inicial (${WEEKS().length} semanas)`;
-  $("#allPct").textContent = ap + "%"; $("#allBar").style.width = ap + "%";
-  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-current", b.dataset.v === view ? "page" : "false"));
+  const userChip = sb && sbUser ? `<div class="user"><b title="${esc(sbUser.email || "")}">${esc(sbUser.email || "")}</b><button type="button" id="supaOut">Sair</button></div>` : "";
+  return `<header class="appbar"><div class="in"><div class="brand"><i>EN</i>Guia diário de inglês</div>
+    <nav class="tabs" id="tabs" aria-label="Seções">${VIEWS.map(v => `<button class="tab" data-v="${v}" type="button" aria-current="${v === view ? "page" : "false"}">${{hoje:"Hoje",calendario:"Calendário",metas:"Metas e testes",anki:"Anki",metodo:"Método",ajustes:"Ajustes"}[v]}</button>`).join("")}</nav>${userChip}</div></header>
+  <div class="wrap">
+    <h1>${view === "hoje" ? "Hoje" : view === "calendario" ? "Calendário" : view === "metas" ? "Metas e testes" : view === "anki" ? "Anki" : view === "metodo" ? "Método" : "Ajustes"}</h1>
+    <p class="lead">${WEEKS().length} semanas · ${esc(c.serieOn ? c.serie : "vídeos do seu barril")}${c.cursoOn ? " + " + esc(c.curso) : ""} · mínimo de 1 hora por dia, meta de 2 horas, fim de semana leve.</p>
+    <div class="stats"><div class="st"><b>${s.streak}</b><span>dias seguidos</span></div><div class="st"><b>${(Math.round(s.hours * 10) / 10).toLocaleString("pt-BR")} h</b><span>de inglês acumuladas</span></div><div class="st"><b>${s.done}</b><span>dias concluídos</span></div><div class="st"><b>${s.cards}</b><span>expressões no Anki</span></div></div>
+    <div class="goalbar"><div class="lbl"><span>Meta ${s.curMeta} · ${esc(METAS[s.curMeta - 1].nome)} · ${s.mDone} de ${s.mTotal} dias</span><b>${mp}%</b></div><div class="bar"><i style="width:${mp}%"></i></div></div>
+    <div class="goalbar"><div class="lbl"><span>Caminho até o B2 inicial (${WEEKS().length} semanas)</span><b>${ap}%</b></div><div class="bar"><i class="sun" style="width:${ap}%"></i></div></div>
+    <p class="sync ${syncMode === "db" || syncMode === "supa" ? "ok" : syncMode === "err" || syncMode === "slow" ? "bad" : ""}" id="sync">${esc(syncText())}</p>
+    <main id="view"></main>
+    <footer><p>Estimativas para o ritmo de 2 h/dia. Com 1 h/dia o caminho leva uns 20 meses em vez de 12; com 3 h, cerca de 9. O que decide é a constância, não um dia perfeito.</p></footer>
+  </div>`;
+}
+function sideHTML(){
+  return `<aside class="side"><div><div class="brand"><i>EN</i>Guia diário de inglês</div></div>
+    <div><h2>Seu inglês, um dia de cada vez.</h2><p>Um calendário que diz exatamente o que estudar hoje, com a sua série, o seu curso e o seu Anki ligados no mesmo lugar.</p>
+    <ul><li>Mínimo de 1 hora por dia; meta de 2. Fim de semana leve.</li><li>Quatro metas com testes: você só avança quando consegue fazer.</li><li>Seu progresso fica na sua conta e aparece em qualquer aparelho.</li></ul></div>
+    <small>Os dados são protegidos por login e por regras de acesso no banco. Ninguém além de você lê o seu progresso.</small></aside>`;
+}
+function authHTML(kind){
+  const c = supaCfg() || {}, cfgForm = () => `${c.url ? `<p class="note" style="margin:0 0 4px">Projeto atual: ${esc(maskUrl(c.url))}. Preencha os dois campos só para trocar.</p>` : ""}<label class="lbl2">URL do projeto</label><input type="url" id="supaUrl" placeholder="https://xxxx.supabase.co" autocomplete="off">
+    <label class="lbl2">Chave publishable <span class="note">(sb_publishable_… ou a anon antiga; nunca a secret)</span></label><input type="password" id="supaKey" placeholder="sb_publishable_…" autocomplete="off">
+    <p class="msg" id="supaNote"></p><button class="btn wide" type="button" id="supaSaveCfg">Salvar e conectar</button>`;
+  let card = "";
+  if (kind === "setup") card = `<div class="authcard"><h3>Configurar o guia</h3><p class="sub">Primeira vez nesta cópia. Conecte ao seu projeto Supabase para ter login e sincronização, ou use só neste navegador.</p>${cfgForm()}<div class="links"><button type="button" id="localOnlyBtn">Usar sem conta, só neste navegador</button></div></div>`;
+  else if (kind === "loading") card = `<div class="authcard"><h3>Conectando…</h3><p class="sub">Carregando a sincronização.</p></div>`;
+  else if (kind === "recovery") card = `<div class="authcard"><h3>Nova senha</h3><p class="sub">Defina uma senha nova para a sua conta.</p><label class="lbl2">Nova senha</label><input type="password" id="newPass" autocomplete="new-password"><label class="lbl2">Confirmar</label><input type="password" id="newPass2" autocomplete="new-password"><p class="msg" id="supaNote"></p><button class="btn wide" type="button" id="supaNewPass">Salvar senha</button></div>`;
+  else { const up = authTab === "up";
+    card = `<div class="authcard"><div class="segs"><button type="button" data-auth="in" aria-pressed="${!up}">Entrar</button><button type="button" data-auth="up" aria-pressed="${up}">Criar conta</button></div>
+    <h3>${up ? "Criar sua conta" : "Bem-vindo de volta"}</h3><p class="sub">${up ? "Você vai receber um e-mail de confirmação." : "Entre para ver o seu dia e o seu progresso."}</p>
+    <label class="lbl2">E-mail</label><input type="email" id="supaEmail" autocomplete="email" inputmode="email">
+    <label class="lbl2">Senha <span class="note">(mínimo 8 caracteres)</span></label><input type="password" id="supaPass" autocomplete="${up ? "new-password" : "current-password"}">
+    <label class="toggle" style="margin-top:12px;font-weight:500;font-size:14px"><input type="checkbox" id="keepIn" ${keepSession() ? "checked" : ""}> Manter conectado neste aparelho</label>
+    <p class="msg" id="supaNote">${sb ? "" : "Conectando ao projeto…"}</p>
+    <button class="btn wide" type="button" id="${up ? "supaUp" : "supaIn"}" ${sb ? "" : "disabled"}>${up ? "Criar conta" : "Entrar"}</button>
+    <div class="links">${up ? "" : `<button type="button" id="supaMagic">Entrar por link no e-mail</button><button type="button" id="supaForgot">Esqueci a senha</button>`}<button type="button" id="supaCfgLink">Trocar o projeto</button></div>
+    <div id="cfgBox" class="hidden" style="margin-top:16px;border-top:1px dashed var(--line);padding-top:12px">${cfgForm()}</div></div>`; }
+  return `<div class="auth">${sideHTML()}<div class="pane">${card}</div></div>`;
+}
+function supaCard(){
+  const c = supaCfg();
+  if (inClaude()) return `<div class="card"><p>Dentro do claude.ai o progresso já sincroniza pela sua conta Claude. O login por Supabase vale para a cópia que você hospeda.</p></div>`;
+  const form = `<details style="margin-top:8px"><summary class="note">${c ? "Trocar o projeto" : "Configurar projeto"}</summary><div style="max-width:460px">${c ? `<p class="note" style="margin:8px 0 0">Projeto atual: ${esc(maskUrl(c.url))}. A chave nunca é exibida; para trocar, digite os dois valores.</p>` : ""}<label class="lbl2">URL do projeto</label><input type="url" id="supaUrl" placeholder="https://xxxx.supabase.co" autocomplete="off"><label class="lbl2">Chave publishable</label><input type="password" id="supaKey" placeholder="sb_publishable_…" autocomplete="off"><p class="msg" id="supaNote"></p><button class="btn sm" type="button" id="supaSaveCfg">Salvar e reconectar</button></div></details>`;
+  if (c && sb && sbUser) return `<div class="card"><p>Conectado como <b>${esc(sbUser.email || "")}</b>${keepSession() ? " (sessão mantida neste aparelho)" : " (pede login a cada abertura)"}. Tudo que você marca aparece nos outros aparelhos em que entrar com essa conta. Ao sair, o progresso local é apagado deste navegador.</p><div class="row"><button class="btn ghost sm" type="button" id="supaOut">Sair</button><button class="btn ghost sm" type="button" id="supaRefresh">Buscar atualizações agora</button><button class="btn ghost sm" type="button" id="keepToggle">${keepSession() ? "Parar de manter conectado" : "Manter conectado neste aparelho"}</button><span class="note" id="supaNote2"></span></div>${form}</div>`;
+  return `<div class="card"><p>Sem projeto configurado: o progresso fica só neste navegador. Conecte a um projeto Supabase para ter login e sincronização.</p>${form}</div>`;
 }
 function taskHTML(k, p, i){
   const t = p.tasks[i], on = doneSet(k).has(i);
@@ -677,7 +789,7 @@ function viewAjustes(){
   <div class="card"><p><b>Início do programa</b> <span class="note">(sempre uma segunda-feira; outras datas são ajustadas para a segunda da mesma semana)</span></p><div class="row"><input type="date" id="startIn" value="${state.start}"><button class="btn ghost sm" type="button" id="startNow">Recomeçar na segunda desta semana</button></div>
    <p class="note" style="margin-top:8px">Hoje você está na semana ${stats().curIdx + 1} de ${W.length}. Os dias já marcados continuam contando nas horas e na sequência.</p></div>
   <div class="row" style="margin:6px 0 20px"><button class="btn" type="button" id="cfgSave">Salvar e recalcular o calendário</button><span class="note" id="cfgNote"></span></div>
-  <h2 class="sec">Sincronização pelo Supabase (cópia hospedada)</h2>
+  <h2 class="sec">Conta e sincronização</h2>
   ${supaCard()}
   <h2 class="sec">Backup e sua própria cópia</h2>
   <div class="card"><p><b>Como o salvamento funciona:</b> dentro do claude.ai, o progresso fica na sua conta e aparece em qualquer aparelho. Numa cópia hospedada por você, fica no navegador de cada aparelho. Para levar o progresso de um lugar para outro, exporte aqui e importe lá.</p>
@@ -687,22 +799,14 @@ function viewAjustes(){
 }
 let toastT = null;
 function toast(msg){ let el = $("#toast"); if (!el){ el = document.createElement("div"); el.id = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); } el.textContent = msg; el.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove("on"), 1800); }
-function supaCard(){
-  const inClaude = !!(window.claude && window.claude.use), c = supaCfg();
-  const cfgForm = `<p style="margin:10px 0 4px"><b>Projeto</b> <span class="note">(Project URL e chave anon public, em Project Settings › API)</span></p>
-    <div class="row"><input type="url" id="supaUrl" placeholder="https://xxxx.supabase.co" value="${esc(c ? c.url : "")}" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><input type="password" id="supaKey" placeholder="chave anon public" value="${esc(c ? c.key : "")}" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><button class="btn sm" type="button" id="supaSaveCfg">Salvar e recarregar</button></div>
-    <label class="toggle" style="margin-top:10px;font-weight:400"><input type="checkbox" id="supaReq" ${c && (c.requireLogin || SUPA_FILE.requireLogin) ? "checked" : ""}> Exigir login para usar esta cópia (a página só abre depois de entrar)</label>`;
-  if (inClaude) return `<div class="card"><p>Dentro do claude.ai o progresso já sincroniza pela sua conta Claude. O Supabase serve para a cópia que você hospeda (GitHub Pages, Netlify ou o seu próprio servidor). Abra essa cópia e configure lá.</p></div>`;
-  if (!c) return `<div class="card"><p>Com um projeto Supabase, o progresso desta cópia sincroniza entre seus aparelhos. Siga os passos do chat para criar a tabela e depois preencha aqui.</p>${cfgForm}</div>`;
-  if (!sb) return `<div class="card"><p class="note">Carregando o Supabase…</p>${cfgForm}</div>`;
-  if (!sbUser) return `<div class="card"><p><b>Entrar</b></p><div class="row"><input type="email" id="supaEmail" placeholder="seu e-mail" autocomplete="email" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><input type="password" id="supaPass" placeholder="senha (mín. 6)" autocomplete="current-password" style="flex:1 1 160px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"></div>
-    <div class="row" style="margin-top:8px"><button class="btn sm" type="button" id="supaIn">Entrar</button><button class="btn ghost sm" type="button" id="supaUp">Criar conta</button><button class="btn ghost sm" type="button" id="supaMagic">Entrar por link no e-mail</button><span class="note" id="supaNote"></span></div>
-    <details style="margin-top:12px"><summary class="note">Trocar o projeto</summary>${cfgForm}</details></div>`;
-  return `<div class="card"><p>Conectado como <b>${esc(sbUser.email || "")}</b>. Tudo que você marca aqui aparece nos outros aparelhos em que entrar com essa conta.</p><div class="row"><button class="btn ghost sm" type="button" id="supaOut">Sair</button><button class="btn ghost sm" type="button" id="supaRefresh">Buscar atualizações agora</button><span class="note" id="supaNote"></span></div>
-    <details style="margin-top:12px"><summary class="note">Trocar o projeto</summary>${cfgForm}</details></div>`;
+function render(){
+  const sc = screen(), app = $("#app");
+  if (sc !== "app"){ app.innerHTML = authHTML(sc); return; }
+  app.innerHTML = shellHTML();
+  $("#view").innerHTML = view === "hoje" ? viewHoje() : view === "calendario" ? viewCalendario() : view === "metas" ? viewMetas() : view === "anki" ? viewAnki() : view === "metodo" ? viewMetodo() : viewAjustes();
 }
-function render(){ if (gateActive()){ renderTop(); $("#view").innerHTML = `<h2 class="sec" style="margin-top:0">Entre para usar o guia</h2><p class="note" style="margin:0 0 12px">Esta cópia exige login. Seu progresso fica na sua conta e aparece em qualquer aparelho.</p>${supaCard()}`; return; } renderTop(); $("#view").innerHTML = view === "hoje" ? viewHoje() : view === "calendario" ? viewCalendario() : view === "metas" ? viewMetas() : view === "anki" ? viewAnki() : view === "metodo" ? viewMetodo() : viewAjustes(); }
 function go(v, push){ view = v; if (push && location.hash !== "#" + v) location.hash = v; render(); window.scrollTo({top: 0}); }
+function supaSaveCfgFromForm(){ const url = ($("#supaUrl").value || "").trim(), k = ($("#supaKey").value || "").trim(), n = $("#supaNote"); if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)){ if (n){ n.textContent = "A URL precisa ser como https://xxxx.supabase.co"; n.className = "msg err"; } return; } if (k.length < 20 || /^sb_secret_/.test(k)){ if (n){ n.textContent = k.startsWith("sb_secret_") ? "Essa é a chave secret: nunca use no site. Copie a publishable." : "Cole a chave publishable (sb_publishable_…)."; n.className = "msg err"; } return; } try { localStorage.setItem("guia-supa", JSON.stringify({url, key: k})); localStorage.removeItem("guia-local"); } catch(err){} location.reload(); }
 function readCfg(){
   const c = Object.assign({}, state.cfg);
   c.serieOn = $("#serieOn").checked; c.cursoOn = $("#cursoOn").checked;
@@ -727,16 +831,24 @@ document.addEventListener("click", e => {
   if (e.target.id === "presetST"){ $("#serieOn").checked = true; $("#serieFields").style.display = ""; $("#serieIn").value = "Stranger Things"; $("#seasonsIn").value = "8, 9, 8, 9, 8"; $("#epwIn").value = "1"; $("#titlesIn").value = ""; return; }
   if (e.target.id === "startNow"){ $("#startIn").value = key(mondayOf(today())); return; }
   if (e.target.id === "cfgSave"){ state.cfg = readCfg(); const v = $("#startIn").value; if (v) state.start = key(mondayOf(parse(v))); state.cfgSaved = true; state.cfgAt = Date.now(); Object.keys(state.days).forEach(k => { const r = state.days[k]; if (r && !r.lvl) recompute(k); }); persist(); render(); $("#cfgNote").textContent = `Pronto: ${WEEKS().length} semanas recalculadas.`; return; }
-  if (e.target.id === "supaSaveCfg"){ const url = ($("#supaUrl").value || "").trim(), k = ($("#supaKey").value || "").trim(); if (!url || !k){ alert("Preencha a URL do projeto e a chave anon."); return; } try { localStorage.setItem("guia-supa", JSON.stringify({url, key: k, requireLogin: !!($("#supaReq") && $("#supaReq").checked)})); } catch(err){} location.reload(); return; }
-  if (e.target.id === "supaIn" || e.target.id === "supaUp" || e.target.id === "supaMagic"){ const email = ($("#supaEmail").value || "").trim(), pass = $("#supaPass").value || "", note = $("#supaNote"); if (!email){ note.textContent = "Digite seu e-mail."; return; }
-    (async () => { try { note.textContent = "Aguarde…";
-      if (e.target.id === "supaMagic"){ const { error } = await sb.auth.signInWithOtp({email, options:{emailRedirectTo: location.href.split("#")[0]}}); if (error) throw error; note.textContent = "Link enviado: abra o e-mail neste aparelho."; return; }
-      if (pass.length < 6){ note.textContent = "A senha precisa ter pelo menos 6 caracteres."; return; }
-      if (e.target.id === "supaUp"){ const { data, error } = await sb.auth.signUp({email, password: pass}); if (error) throw error; note.textContent = data.session ? "Conta criada e conectada." : "Conta criada: confirme no e-mail e depois clique em Entrar."; return; }
+  if (e.target.id === "supaSaveCfg"){ supaSaveCfgFromForm(); return; }
+  if (e.target.id === "localOnlyBtn"){ try { localStorage.setItem("guia-local", "1"); } catch(err){} render(); return; }
+  if (e.target.id === "keepToggle"){ const k = !keepSession(); try { k ? localStorage.setItem("guia-keep", "1") : localStorage.removeItem("guia-keep"); } catch(err){} const n = $("#supaNote2"); if (n) n.textContent = k ? "Na próxima abertura, entra sem pedir senha." : "Na próxima abertura, pede senha de novo."; return; }
+  if (e.target.id === "supaCfgLink"){ const b = $("#cfgBox"); if (b) b.classList.toggle("hidden"); return; }
+  const at = e.target.closest("[data-auth]"); if (at){ authTab = at.dataset.auth; render(); return; }
+  if (e.target.id === "supaForgot"){ const email = ($("#supaEmail").value || "").trim(), n = $("#supaNote"); if (!email){ n.textContent = "Digite seu e-mail para receber o link."; n.className = "msg err"; return; } sb.auth.resetPasswordForEmail(email, {redirectTo: location.href.split("#")[0]}).then(({error}) => { n.textContent = error ? "Erro: " + error.message : "Enviado: abra o e-mail neste aparelho para definir a nova senha."; n.className = error ? "msg err" : "msg"; }); return; }
+  if (e.target.id === "supaNewPass"){ const a = $("#newPass").value, b = $("#newPass2").value, n = $("#supaNote"); if (a.length < 8){ n.textContent = "A senha precisa ter pelo menos 8 caracteres."; n.className = "msg err"; return; } if (a !== b){ n.textContent = "As senhas não conferem."; n.className = "msg err"; return; } sb.auth.updateUser({password: a}).then(({error}) => { if (error){ n.textContent = "Erro: " + error.message; n.className = "msg err"; return; } recovery = false; toast("Senha atualizada"); render(); }); return; }
+  if (e.target.id === "supaIn" || e.target.id === "supaUp" || e.target.id === "supaMagic"){ const email = ($("#supaEmail").value || "").trim(), pass = ($("#supaPass") || {}).value || "", note = $("#supaNote"), btn = e.target; if (!email){ note.textContent = "Digite seu e-mail."; note.className = "msg err"; return; }
+    (async () => { try { note.className = "msg"; note.textContent = "Aguarde…"; btn.disabled = true;
+      const keep = !!($("#keepIn") && $("#keepIn").checked); try { keep ? localStorage.setItem("guia-keep", "1") : localStorage.removeItem("guia-keep"); } catch(err){}
+      makeClient(supaCfg(), keep);
+      if (e.target.id === "supaMagic"){ const { error } = await sb.auth.signInWithOtp({email, options:{emailRedirectTo: location.href.split("#")[0], shouldCreateUser: false}}); if (error) throw error; note.textContent = "Link enviado: abra o e-mail neste aparelho."; return; }
+      if (pass.length < 8){ note.textContent = "A senha precisa ter pelo menos 8 caracteres."; note.className = "msg err"; return; }
+      if (e.target.id === "supaUp"){ const { data, error } = await sb.auth.signUp({email, password: pass, options:{emailRedirectTo: location.href.split("#")[0]}}); if (error) throw error; if (data.session){ note.textContent = "Conta criada e conectada."; } else { authTab = "in"; render(); const n2 = $("#supaNote"); if (n2) n2.textContent = "Conta criada. Confirme no e-mail e depois entre aqui."; } return; }
       const { error } = await sb.auth.signInWithPassword({email, password: pass}); if (error) throw error; note.textContent = "Conectado.";
-    } catch(err){ note.textContent = "Erro: " + (err.message || err); } })(); return; }
-  if (e.target.id === "supaOut"){ sb.auth.signOut(); return; }
-  if (e.target.id === "supaRefresh"){ sbLoad().then(() => { const n = $("#supaNote"); if (n) n.textContent = "Atualizado."; }); return; }
+    } catch(err){ note.textContent = "Erro: " + (err.message || err); note.className = "msg err"; } finally { btn.disabled = false; } })(); return; }
+  if (e.target.id === "supaOut"){ sb.auth.signOut().then(() => { clearLocalProgress(); render(); }); return; }
+  if (e.target.id === "supaRefresh"){ sbLoad().then(() => { const n = $("#supaNote2"); if (n) n.textContent = "Atualizado."; }); return; }
   if (e.target.id === "resetAll"){ if (confirm("Zerar todos os dias marcados e os testes?")){ const u = Date.now(); for (const k in state.days) state.days[k] = {t:[], lvl:"none", min:0, est:0, u}; state.tests = {}; state.cando = {}; persist(); render(); } return; }
   if (e.target.id === "expBtn"){ const txt = JSON.stringify(state); $("#ioBox").value = txt; try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], {type:"application/json"})); a.download = "guia-ingles-progresso.json"; document.body.appendChild(a); a.click(); a.remove(); } catch(err){} if (navigator.clipboard) navigator.clipboard.writeText(txt).then(() => $("#ioNote").textContent = "Copiado. Se o download não abriu, cole o texto num arquivo .json.", () => $("#ioNote").textContent = "Selecione o texto da caixa e copie."); return; }
   if (e.target.id === "impBtn"){ try { const d = JSON.parse($("#ioBox").value); if (!d || typeof d !== "object") throw 0; const push = mergeRemote(d); if (d.days) for (const k in d.days) if (!state.days[k]) state.days[k] = d.days[k]; persist(); render(); $("#ioNote").textContent = "Importado: o mais recente de cada dia foi mantido."; } catch(err){ $("#ioNote").textContent = "Não consegui ler esse texto. Cole o conteúdo exportado inteiro."; } return; }
@@ -744,14 +856,14 @@ document.addEventListener("click", e => {
 document.addEventListener("change", e => {
   const t = e.target;
   if (t.matches(".task input")){ const k = t.dataset.k, i = Number(t.dataset.i), s = doneSet(k), prev = rec(k) || {}; t.checked ? s.add(i) : s.delete(i); state.days[k] = Object.assign({}, prev, {t:[...s]}); recompute(k); persist(); render(); toast((t.checked ? "Marcado: " : "Desmarcado: ") + t.getAttribute("aria-label")); return; }
-  if (t.id === "nIn"){ const k = t.dataset.k; const r = rec(k) || {t:[]}; r.n = Math.max(0, Number(t.value) || 0); state.days[k] = r; recompute(k); if (!state.days[k]) state.days[k] = {t:[], lvl:"partial", min:0, est:0, n:r.n}; persist(); renderTop(); return; }
+  if (t.id === "nIn"){ const k = t.dataset.k; const r = rec(k) || {t:[]}; r.n = Math.max(0, Number(t.value) || 0); state.days[k] = r; recompute(k); if (!state.days[k]) state.days[k] = {t:[], lvl:"partial", min:0, est:0, n:r.n}; persist(); render(); return; }
   if (t.dataset.cando){ state.cando[t.dataset.cando] = t.checked; persist(); return; }
   if (t.dataset.q !== undefined && t.dataset.m){ const m = "m" + t.dataset.m; quizPick[m] = quizPick[m] || {}; quizPick[m][Number(t.dataset.q)] = Number(t.dataset.o); return; }
   if (t.id === "serieOn"){ $("#serieFields").style.display = t.checked ? "" : "none"; return; }
   if (t.id === "cursoOn"){ $("#cursoFields").style.display = t.checked ? "" : "none"; return; }
 });
 window.addEventListener("hashchange", () => { const v = location.hash.slice(1); if (VIEWS.includes(v) && v !== view) go(v, false); });
-(function start(){ const v = location.hash.slice(1); if (VIEWS.includes(v)) view = v; render(); setSync("local"); if (window.claude && window.claude.use) initDb(); else initSupabase(); })();
+(function start(){ const v = location.hash.slice(1); if (VIEWS.includes(v)) view = v; syncMode = "local"; render(); if (inClaude()) initDb(); else initSupabase(); })();
 
 </script>
 </body>
