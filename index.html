@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guia diário de inglês</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF3F4; --surface:#FFFFFF; --surface-2:#F4F8F9; --ink:#10232F; --muted:#4F6B7A;
+  --line:#D2DEE2; --sea:#0D6B77; --sea-soft:#D6ECEE; --sun:#E9A21F; --sun-soft:#FCEFD2; --sun-ink:#5A3A00;
+  --half:#8FC7CE; --focus:#0D6B77;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0D171D;--surface:#14232B;--surface-2:#192C35;--ink:#E4EEF1;--muted:#9AB4C0;--line:#26404B;--sea:#5CC4CE;--sea-soft:#163C43;--sun:#F4BC4B;--sun-soft:#3A2E12;--sun-ink:#FBE3B0;--half:#2E6C74;--focus:#5CC4CE;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0D171D;--surface:#14232B;--surface-2:#192C35;--ink:#E4EEF1;--muted:#9AB4C0;--line:#26404B;--sea:#5CC4CE;--sea-soft:#163C43;--sun:#F4BC4B;--sun-soft:#3A2E12;--sun-ink:#FBE3B0;--half:#2E6C74;--focus:#5CC4CE;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px 18px 64px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.2vw,34px);line-height:1.08;letter-spacing:-.015em;margin:0 0 4px}
+.lead{margin:0;color:var(--muted);font-size:15px}
+
+/* top stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 6px}
+@media (max-width:560px){.stats{grid-template-columns:1fr 1fr;gap:6px}}
+.st{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}
+.st b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(22px,4vw,30px);line-height:1}
+.st span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.goalbar{margin:10px 0 0}
+.goalbar .lbl{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted);margin-bottom:5px}
+.goalbar .lbl b{color:var(--ink)}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;position:relative}
+.bar i{display:block;height:100%;background:var(--sea);border-radius:5px;transition:width .5s ease}
+.bar i.sun{background:var(--sun)}
+.sync{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+
+/* nav */
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:18px 0 20px;padding-bottom:4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:700;font-size:15px}
+.tab[aria-current="page"]{background:var(--sea);border-color:var(--sea);color:var(--surface)}
+
+/* day panel */
+.dayhead{margin:0 0 4px;font-family:var(--display);font-size:clamp(22px,3.6vw,30px);font-weight:800;line-height:1.1}
+.dayctx{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+.dayctx b{color:var(--ink)}
+.epi{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--sea);border-radius:12px;padding:12px 16px;margin:0 0 16px}
+.epi h4{margin:0 0 4px;font-family:var(--display);font-size:17px}
+.epi p{margin:0;font-size:15px}
+.epi p+p{margin-top:6px;color:var(--muted)}
+.status{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.pill{border-radius:999px;padding:5px 12px;font-size:13.5px;font-weight:700;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.pill.on{background:var(--sun-soft);border-color:var(--sun);color:var(--sun-ink)}
+.pill.full{background:var(--sea-soft);border-color:var(--sea);color:var(--ink)}
+.grp{margin:0 0 18px}
+.grp h3{font-family:var(--display);font-size:18px;margin:0 0 8px;display:flex;align-items:baseline;gap:10px}
+.grp h3 small{font-family:var(--body);font-weight:400;color:var(--muted);font-size:14px}
+.task{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.task.done{background:var(--sun-soft);border-color:var(--sun)}
+.task input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--sun);cursor:pointer}
+.task .tt{display:block;font-weight:700;line-height:1.3}
+.task .td{display:block;font-size:14.5px;color:var(--muted);margin-top:3px}
+.task.done .td{color:var(--sun-ink)}
+.task .ta{display:block;font-size:13px;margin-top:6px;color:var(--sea);font-weight:700}
+.task .tm{text-align:right;font-family:var(--display);font-weight:800;font-size:18px;line-height:1;white-space:nowrap}
+.task .tm small{display:block;font-family:var(--body);font-weight:400;font-size:11.5px;color:var(--muted);margin-top:3px}
+.ankibox{background:var(--sea-soft);border-radius:12px;padding:12px 16px;margin:0 0 16px}
+.ankibox h4{margin:0 0 4px;font-family:var(--display);font-size:16px}
+.ankibox ul{margin:4px 0 0;padding-left:18px;font-size:15px}
+.note{font-size:14px;color:var(--muted)}
+.btn{border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;border:2px solid var(--sea);background:var(--sea);color:var(--surface)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.sm{padding:6px 12px;font-size:14px}
+
+/* calendar */
+.calhead{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+.calhead h2{font-family:var(--display);font-size:22px;margin:0}
+@media (max-width:560px){.cell{height:56px;padding:4px 5px}.cell .n{font-size:13px}.cell .lb{font-size:9.5px}.calhead .btn{padding:6px 8px;font-size:13px}}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.dow{text-align:center;font-size:12px;color:var(--muted);padding-bottom:4px}
+.cell{height:74px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:5px 6px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;text-align:left;min-width:0;position:relative}
+.cell.out{opacity:.35;cursor:default}
+.cell.wk{background:var(--surface-2)}
+.cell.today{border-color:var(--sea);box-shadow:inset 0 0 0 1.5px var(--sea)}
+.cell.sel{outline:3px solid var(--sun);outline-offset:-3px}
+.cell .n{font-family:var(--display);font-weight:800;font-size:15px;line-height:1}
+.cell .lb{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .d{position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:transparent}
+.cell.min .d{background:var(--half)}
+.cell.full .d{background:var(--sun)}
+.cell.test .lb{color:var(--sea);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);margin:10px 0 24px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+
+/* metas */
+.meta{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+.meta.cur{border-color:var(--sea);box-shadow:inset 0 0 0 1px var(--sea)}
+.meta h3{font-family:var(--display);font-size:21px;margin:0 0 2px}
+.meta .ms{color:var(--muted);font-size:14px;margin:0 0 10px}
+.meta ul{margin:10px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.meta li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.meta li input{width:18px;height:18px;margin-top:3px;accent-color:var(--sun)}
+.quiz{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
+.q{margin:0 0 14px}
+.q p{margin:0 0 6px;font-weight:700}
+.q label{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin-bottom:5px;cursor:pointer;font-size:15px}
+.q label.ok{border-color:var(--sea);background:var(--sea-soft)}
+.q label.bad{border-color:#C0392B}
+.q .ex{font-size:14px;color:var(--muted);margin-top:4px}
+.prompt{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;white-space:pre-wrap}
+
+/* generic sections */
+h2.sec{font-family:var(--display);font-size:24px;margin:28px 0 10px}
+h3.sub{font-family:var(--display);font-size:18px;margin:20px 0 8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.card p{margin:0 0 8px}
+.card ol,.card ul{margin:6px 0 0;padding-left:20px}
+.card li{margin-bottom:6px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:14px}
+.tablewrap{overflow-x:auto}
+textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--surface);resize:vertical}
+input[type=date],input[type=number]{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.kbd{font-family:var(--display);font-weight:700;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:13px}
+footer{margin-top:40px;color:var(--muted);font-size:13.5px}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:90vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:20}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.banner{border-left:5px solid var(--sun)}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-weight:700;cursor:pointer}.toggle input{width:18px;height:18px;accent-color:var(--sea)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Guia diário de inglês</h1>
+    <p class="lead" id="lead"></p>
+    <div class="stats">
+      <div class="st"><b id="stStreak">0</b><span>dias seguidos</span></div>
+      <div class="st"><b id="stHours">0 h</b><span>de inglês acumuladas</span></div>
+      <div class="st"><b id="stDays">0</b><span>dias concluídos</span></div>
+      <div class="st"><b id="stCards">0</b><span>expressões no Anki</span></div>
+    </div>
+    <div class="goalbar"><div class="lbl"><span id="metaLbl">Meta 1</span><b id="metaPct">0%</b></div><div class="bar"><i id="metaBar" style="width:0%"></i></div></div>
+    <div class="goalbar"><div class="lbl"><span id="allLbl">Caminho até o B2 inicial</span><b id="allPct">0%</b></div><div class="bar"><i class="sun" id="allBar" style="width:0%"></i></div></div>
+    <p class="sync" id="sync">Carregando seu progresso…</p>
+  </header>
+  <nav class="tabs" id="tabs" aria-label="Seções">
+    <button class="tab" data-v="hoje" type="button">Hoje</button>
+    <button class="tab" data-v="calendario" type="button">Calendário</button>
+    <button class="tab" data-v="metas" type="button">Metas e testes</button>
+    <button class="tab" data-v="anki" type="button">Anki</button>
+    <button class="tab" data-v="metodo" type="button">Método</button>
+    <button class="tab" data-v="ajustes" type="button">Ajustes</button>
+  </nav>
+  <main id="view"></main>
+  <footer><p>Estimativas para o ritmo de 2 h/dia. Com 1 h/dia o caminho leva uns 20 meses em vez de 12; com 3 h, cerca de 9. O que decide é a constância, não um dia perfeito.</p></footer>
+</div>
+<script>
+/* ---------- Preset: Stranger Things (cenas sugeridas) ---------- */
+const PRESETS = {
+ "stranger things": {serie:"Stranger Things", seasons:[8,9,8,9,8], titles:{
+  "1-1":["The Vanishing of Will Byers","O jogo de D&D no porão do Mike, nos primeiros minutos: quatro amigos discutindo uma jogada.","Vozes de crianças, frases curtas e muita emoção. Ótimo para shadowing.","início (logo depois da cena do laboratório)"],
+  "1-2":["The Weirdo on Maple Street","Os meninos conhecendo a Eleven no porão e tentando se comunicar com ela.","Frases simples, repetidas e lentas, porque eles falam devagar para ela entender.","primeiro terço (a manhã seguinte, no porão)"],
+  "1-3":["Holly, Jolly","Mike explicando a escola e os amigos para a Eleven.","Explicações claras com vocabulário do dia a dia.","meio"],
+  "1-4":["The Body","Os meninos usando o rádio da escola com o Sr. Clarke.","Pedidos educados e perguntas, úteis para a vida real.","meio"],
+  "1-5":["The Flea and the Acrobat","O Sr. Clarke explicando o Mundo Invertido com a pulga e o acrobata.","Um professor explicando devagar: a cena mais clara da temporada.","meio (na sala de aula)"],
+  "1-6":["The Monster","Nancy e Jonathan comprando equipamento na loja de artigos militares.","Diálogo de compra: preço, pedir produtos, decidir junto.","início"],
+  "1-7":["The Bathtub","Hopper e Joyce negociando com o Dr. Brenner no laboratório.","Adultos falando com calma e firmeza; vocabulário de negociação.","meio"],
+  "1-8":["The Upside Down","Mike convidando a Eleven para o baile de inverno, na sala de aula.","Convite, planos e futuro com will.","final"],
+  "2-1":["MADMAX","O jantar do Hopper e da Eleven na cabana, com as regras da casa.","Regras com must e can't, num diálogo lento entre duas pessoas.","meio"],
+  "2-2":["Trick or Treat, Freak","Hopper e Eleven conversando sobre o Halloween na cabana.","Negociação em família com vocabulário de rotina.","início"],
+  "2-3":["The Pollywog","Dustin apresentando o Dart para os amigos na escola.","Descrição de um animal e discussão entre amigos.","primeiro terço"],
+  "2-4":["Will the Wise","A briga entre Hopper e Eleven na cabana.","Passado simples e emoção forte: ótimo para treinar entonação.","final"],
+  "2-5":["Dig Dug","Bob descobrindo que os desenhos do Will formam um mapa, na cozinha.","Raciocínio em voz alta, frases curtas e claras.","meio"],
+  "2-6":["The Spy","Steve e Dustin caminhando nos trilhos do trem e falando de garotas e cabelo.","Conversa descontraída entre dois amigos: o inglês mais natural da série.","meio"],
+  "2-7":["The Lost Sister","Eleven conhecendo a Kali e o grupo dela em Chicago.","Sotaques e ritmo diferentes dos de Hawkins.","início"],
+  "2-8":["The Mind Flayer","O grupo planejando o próximo passo na casa dos Byers.","Muitas vozes, planos e discordância: treino de escuta em grupo.","meio"],
+  "2-9":["The Gate","Hopper e Eleven no carro, antes do portal.","Pedido de desculpas e conversa íntima, com passado e presente perfeito.","início"],
+  "3-1":["Suzie, Do You Copy?","Steve e Robin no balcão da Scoops Ahoy com o quadro de pontos.","Humor e ironia; frases curtas e muito usadas.","início"],
+  "3-2":["The Mall Rats","Hopper ensaiando a conversa séria com Mike, com ajuda da Joyce.","Um adulto ensaiando um discurso: repetição natural.","início"],
+  "3-3":["The Case of the Missing Lifeguard","Dustin, Steve e Robin decifrando a mensagem em russo.","Vocabulário de raciocínio e dedução.","início"],
+  "3-4":["The Sauna Test","A negociação com a Erica para entrar no duto de ventilação.","Negociação com ritmo rápido: desafio bom.","meio"],
+  "3-5":["The Flayed","Hopper e Joyce discutindo no carro.","Casal discutindo com frases do cotidiano.","meio"],
+  "3-6":["E Pluribus Unum","Steve e Robin sendo interrogados na base russa.","Perguntas e respostas sob pressão.","final"],
+  "3-7":["The Bite","Steve e Robin conversando no banheiro do cinema.","Conversa honesta entre duas pessoas: a melhor cena de diálogo da temporada.","final"],
+  "3-8":["The Battle of Starcourt","Eleven lendo a carta do Hopper, no final.","Um texto lido com calma: perfeito para shadowing completo.","final"],
+  "4-1":["The Hellfire Club","O discurso do Eddie no refeitório da escola.","Um monólogo rápido e cheio de energia: desafio de escuta.","início"],
+  "4-2":["Vecna's Curse","Mike chegando ao aeroporto da Califórnia e encontrando a Eleven.","Aeroporto e reencontro: vocabulário de viagem na prática.","início"],
+  "4-3":["The Monster and the Superhero","Dustin, Steve, Robin e Max conversando sobre o Eddie no trailer.","Um grupo organizando informações, com frases claras.","meio"],
+  "4-4":["Dear Billy","Max lendo a carta no cemitério.","Monólogo emocional e lento: ótimo para entonação.","final"],
+  "4-5":["The Nina Project","Nancy e Robin na visita ao hospital psiquiátrico.","Linguagem formal e educada numa situação oficial.","meio"],
+  "4-6":["The Dive","Steve, Robin, Nancy e Eddie no barco, no lago.","Conversa em grupo com brincadeiras e tensão.","meio"],
+  "4-7":["The Massacre at Hawkins Lab","Steve e Nancy conversando no Mundo Invertido.","Diálogo calmo entre dois personagens, com planos e sonhos.","final"],
+  "4-8":["Papa","Hopper e Joyce conversando na prisão, na Rússia.","Adultos falando com calma sobre o passado.","início"],
+  "4-9":["The Piggyback","O discurso do Mike para a Eleven na van.","Um monólogo longo e claro: a prova final.","meio"],
+  "5-1":["The Crawl"],"5-2":["The Vanishing of..."],"5-3":["The Turnbow Trap"],"5-4":["Sorcerer"],"5-5":["Shock Jock"],"5-6":["Escape From Camazotz"],"5-7":["The Bridge"],"5-8":["The Rightside Up"]
+ }}
+};
+/* Sugestões de cena para qualquer série (rodízio) */
+const GENERIC_SCENES = [
+ ["Uma conversa calma entre dois personagens.","Poucas vozes e frases completas: o melhor começo.","primeiros 15 min"],
+ ["Uma cena em que alguém explica algo para outra pessoa.","Explicações têm ritmo lento e vocabulário útil.","qualquer parte"],
+ ["Uma discussão ou desentendimento entre dois personagens.","Emoção forte ajuda a fixar a entonação.","meio do episódio"],
+ ["Uma cena de rotina: cozinha, carro, trabalho ou escola.","Vocabulário do dia a dia que você vai usar.","primeiros 15 min"],
+ ["Uma cena com um pedido, um convite ou uma negociação.","Estruturas de viagem e de trabalho na prática.","qualquer parte"],
+ ["Um monólogo ou uma fala longa de um personagem.","Perfeito para shadowing completo.","final do episódio"]
+];
+const DEFAULT_CFG = {serie:"Stranger Things", seasons:[8,9,8,9,8], titlesText:"", epw:1, serieOn:true, cursoOn:true, curso:"Método Gabriel Borges", aulas:40, barril:["BBC 6 Minute English","Easy English (entrevistas de rua)","Um podcast do seu interesse"]};
+
+/* ---------- Temas de viagem (roleplay) ---------- */
+const THEMES = [
+ {n:"Apresentações e small talk", rp:"você chega num hostel e puxa conversa com um viajante na área comum"},
+ {n:"Rotina e vida diária", rp:"um colega de trabalho estrangeiro pergunta como é o seu dia trabalhando de casa"},
+ {n:"Aeroporto e voos", rp:"seu voo foi cancelado e você precisa remarcar no balcão da companhia"},
+ {n:"Hotel e hospedagem", rp:"o ar-condicionado do quarto não funciona e você liga para a recepção"},
+ {n:"Restaurante e comida", rp:"você tem alergia a frutos do mar e precisa pedir num restaurante desconhecido"},
+ {n:"Cidade e direções", rp:"você está perdido numa cidade estrangeira e pergunta como chegar à estação"},
+ {n:"Compras e dinheiro", rp:"você compra um chip de celular no aeroporto e compara dois planos"},
+ {n:"Saúde e emergências", rp:"você torceu o tornozelo jogando na praia e vai a uma clínica"},
+ {n:"Beach tennis e esportes", rp:"você explica as regras do beach tennis para um turista e combina um jogo"},
+ {n:"Jogos e opiniões", rp:"um amigo estrangeiro pergunta que jogo comprar e você defende sua escolha"},
+ {n:"Trabalho e tecnologia", rp:"daily meeting: o que você fez ontem, o que vai fazer hoje e um impedimento"},
+ {n:"Planejar uma viagem", rp:"você e um amigo planejam 3 dias numa cidade, com plano B se chover"}
+];
+
+/* ---------- Metas (texto genérico; {S} = nome da série, {P} = parte da série) ---------- */
+const METAS = [
+ {n:1, nome:"Ouvido destravado", legenda:"Legenda dupla: inglês em cima, português embaixo (Language Reactor). Quando perceber que olha o português só de vez em quando, passe para só inglês.",
+  cando:["Acompanhar {P} com legenda dupla, olhando o português só de vez em quando","Reconhecer de ouvido gonna, wanna, gotta, kinda e lemme","Contar um episódio em inglês por 1 minuto, mesmo com erros","Ter uns 300 cartões no Anki, revisados sem atraso"],
+  quiz:[
+   {q:"Every Monday, my brother ___ to the gym after work.", o:["go","goes","is going","went"], a:1, e:"Hábito (every Monday) pede present simple; com he, o verbo leva -s."},
+   {q:"I like ___ video games with my friends.", o:["play","to playing","playing","played"], a:2, e:"Depois de like, o verbo vai com -ing (ou to + verbo). Nunca like play."},
+   {q:"Right now, my mom ___ the lights in the living room.", o:["hangs","is hanging","hang","hanged"], a:1, e:"Right now = agora: present continuous (is + -ing)."},
+   {q:"___ a lot of people at the beach today.", o:["There is","There are","It has","Have"], a:1, e:"Para dizer que algo existe, usamos there is / there are. People é plural: there are."},
+   {q:"Yesterday I ___ to my friend's house.", o:["go","goes","went","going"], a:2, e:"Yesterday pede passado simples: went."},
+   {q:"\u201cI'm gonna call you\u201d means:", o:["I called you","I'm going to call you","I want to call you","I can call you"], a:1, e:"Gonna é a redução de going to na fala."}
+  ],
+  falar:"Grave 1 minuto em inglês contando o que acontece no primeiro episódio que você estudou.",
+  prompt:"Quero fazer o teste da Meta 1 do meu plano de inglês (estou estudando com a série {S}, nível A2 para B1). Me faça 6 perguntas simples em inglês sobre a série e sobre a minha rotina, uma de cada vez. Depois corrija meus erros e me diga se posso avançar para a Meta 2."},
+ {n:2, nome:"Legenda só em inglês", legenda:"Só legenda em inglês. O português aparece só se você passar o mouse na palavra. Se entender menos da metade de um episódio, volte à dupla por uma semana.",
+  cando:["Assistir {P} com legenda só em inglês, entendendo uns 70% sem pausar","Repetir uma cena curta com ritmo e entonação parecidos com os do ator","Usar sem pensar: I like playing, I went, it's, a lot of","Explicar as principais reduções da fala (gonna, gotta, whatcha)"],
+  quiz:[
+   {q:"The coach ___ a new rule for the team last night.", o:["make","maked","made","was make"], a:2, e:"Passado de make é made (irregular). Nunca was + verbo para ação."},
+   {q:"Is there ___ milk in the fridge? No, there isn't ___.", o:["some / any","any / any","any / some","much / many"], a:1, e:"Em perguntas e negativas, usamos any."},
+   {q:"My car is ___ than yours.", o:["more fast","faster","fastest","the faster"], a:1, e:"Adjetivo curto: comparativo com -er."},
+   {q:"I ___ in this city since I was born.", o:["live","am living","have lived","lived"], a:2, e:"Since + começou no passado e continua: present perfect (have lived)."},
+   {q:"\u201cI gotta go\u201d means:", o:["I have to go","I got a goal","I want to go","I went"], a:0, e:"Gotta é a redução de got to / have got to: ter que."},
+   {q:"We ___ to the new apartment two months ago.", o:["move","moved","have moved","moving"], a:1, e:"Two months ago = tempo definido no passado: past simple."}
+  ],
+  falar:"Grave 2 minutos resumindo {P} e dizendo qual foi seu personagem favorito e por quê.",
+  prompt:"Quero fazer o teste da Meta 2 do meu plano de inglês (série {S}, nível B1 inicial). Converse comigo em inglês por 8 trocas sobre a série e sobre uma viagem que eu já fiz, usando passado. Depois corrija meus erros, avalie minha compreensão e me diga se posso avançar para a Meta 3."},
+ {n:3, nome:"B1 sólido", legenda:"Legenda em inglês nos episódios novos. Nas cenas e episódios que você já viu, nenhuma legenda.",
+  cando:["Entender cenas já vistas sem nenhuma legenda","Se virar numa viagem: aeroporto, hotel, restaurante, direções e imprevistos","Conversar 10 minutos com a IA por voz sem voltar para o português","Dar sua opinião sobre um episódio em 2 minutos, usando because, but e so"],
+  quiz:[
+   {q:"If it ___ tomorrow, we'll stay at the mall.", o:["will rain","rains","rained","would rain"], a:1, e:"First conditional: if + presente, will no resultado."},
+   {q:"You ___ drink more water in this heat.", o:["should","should to","must to","have"], a:0, e:"Should + verbo base: conselho."},
+   {q:"Could you tell me where ___?", o:["is the station","the station is","does the station","the station does"], a:1, e:"Pergunta indireta: ordem de afirmação (the station is)."},
+   {q:"Have you ever ___ to the United States?", o:["go","went","gone","been"], a:3, e:"Have you ever been to... = já esteve em. Been é o particípio usado com lugares."},
+   {q:"When I got to the airport, the plane ___.", o:["leaves","has left","had already left","leave"], a:2, e:"Ação anterior a outro ponto do passado: past perfect (had left)."},
+   {q:"\u201cWhatcha doing?\u201d means:", o:["What are you doing?","Watch what you're doing","What did you do?","Which one are you doing?"], a:0, e:"Whatcha = what are you, na fala rápida."}
+  ],
+  falar:"Grave 2 minutos dando sua opinião sobre {P}: o que foi bom, o que foi ruim e por quê.",
+  prompt:"Quero fazer o teste da Meta 3 do meu plano de inglês (nível B1, estudando com {S}). Faça um roleplay comigo em inglês: eu chego num hotel com um problema na reserva. Depois me faça 5 perguntas sobre a série e sobre meus planos de viagem. Corrija meus erros e me diga se posso avançar para a Meta 4."},
+ {n:4, nome:"Rumo ao B2", legenda:"Legenda em inglês nos episódios novos. Reveja os primeiros episódios sem legenda.",
+  cando:["Rever os primeiros episódios sem legenda, entendendo a maior parte","Acompanhar episódios novos com legenda em inglês sem esforço","Conversar 20 minutos com uma pessoa real sobre jogos, viagem ou trabalho","Trocar de série e variar sotaques, rumo ao C1"],
+  quiz:[
+   {q:"By the time we got there, the police ___.", o:["arrived","has arrived","had already arrived","arrive"], a:2, e:"By the time + passado: past perfect para a ação anterior."},
+   {q:"She ___ skate every day, but she stopped after the accident.", o:["used to","is used to","use to","was used"], a:0, e:"Used to + verbo base: costumava fazer no passado."},
+   {q:"If I ___ you, I wouldn't open that door.", o:["am","was","were","be"], a:2, e:"Second conditional: if I were you (hipótese)."},
+   {q:"He said he ___ to the lab the next day.", o:["will go","would go","goes","is going"], a:1, e:"Discurso indireto: will vira would."},
+   {q:"We need to ___ a plan before the deadline.", o:["come up with","come down with","put up with","get over"], a:0, e:"Come up with = criar, ter uma ideia."},
+   {q:"\u201cI should've known\u201d means:", o:["I knew","I was supposed to know and I didn't","I will know","I don't know"], a:1, e:"Should have + particípio: arrependimento sobre o passado."}
+  ],
+  falar:"Grave 3 minutos sem parar sobre {S}: o que mudou em você como espectador e como estudante.",
+  prompt:"Quero fazer o teste da Meta 4 do meu plano de inglês (nível B2 inicial, estudando com {S}). Converse comigo em inglês por 12 trocas sobre a série, trabalho remoto e viagens, falando num ritmo natural. Depois avalie minha fluência, meus erros mais frequentes e me diga se estou pronto para a próxima série e para conversas com pessoas reais."}
+];
+
+/* ---------- Monta o programa a partir da configuração ---------- */
+function episodeList(cfg){
+  const key = cfg.serie.trim().toLowerCase(), preset = PRESETS[key];
+  const pasted = (cfg.titlesText || "").split("\n").map(x => x.trim()).filter(Boolean);
+  const eps = []; let gi = 0;
+  cfg.seasons.forEach((cnt, si) => { for (let e = 1; e <= cnt; e++){
+    const s = si + 1, pk = `${s}-${e}`, pr = preset && preset.titles[pk], gen = GENERIC_SCENES[gi % GENERIC_SCENES.length];
+    eps.push({s, e, title: pasted[gi] || (pr && pr[0]) || `Episódio ${e}`, scene: (pr && pr[1]) || gen[0], why: (pr && pr[2]) || gen[1], pos: (pr && pr[3]) || gen[2]});
+    gi++; } });
+  return eps;
+}
+function buildWeeks(cfg){
+  const W = [], multi = cfg.seasons.length > 1;
+  const label = ep => (multi ? `T${ep.s}E${ep.e}` : `E${ep.e}`);
+  let chunks = [];
+  if (cfg.serieOn){
+    const E = episodeList(cfg);
+    if (cfg.seasons.length >= 4){ const bySeason = s => E.filter(x => x.s === s); chunks = [bySeason(1), bySeason(2), bySeason(3), E.filter(x => x.s >= 4)]; }
+    else { const n = Math.ceil(E.length / 4); chunks = [0,1,2,3].map(i => E.slice(i * n, (i + 1) * n)); }
+    chunks = chunks.map(c => c.length ? c : null);
+    const epw = cfg.epw === 2 ? 2 : 1;
+    const push = (meta, group) => { for (let i = 0; i < group.length; i += epw){ const eps = group.slice(i, i + epw); W.push({meta, type:"ep", eps, label: eps.map(label).join(" + "), title: eps.map(x => x.title).join(" / "), scene: eps[0].scene, why: eps[0].why, pos: eps[0].pos, sub: multi ? `Temporada ${eps[0].s}` : "Episódios"}); } };
+    const rew = (meta, list, extra) => W.push({meta, type:"rewatch", eps:list, label: list.map(label).join(", "), title:`Rever sem legenda: ${list.map(label).join(", ")}${extra ? " + " + extra : ""}`});
+    for (let m = 0; m < 4; m++){
+      if (chunks[m]) push(m + 1, chunks[m]);
+      if (m === 2 && E.length){ const base = E.slice(0, 8), half = Math.ceil(base.length / 2); rew(3, base.slice(0, half)); rew(3, base.slice(half).length ? base.slice(half) : base.slice(0, half)); }
+      if (m === 3 && E.length){ for (let i = 0; i < 4; i++){ const a = E[(2 * i) % E.length], b = E[(2 * i + 1) % E.length]; rew(4, a === b ? [a] : [a, b], "conversa real"); } }
+    }
+  } else {
+    const sizes = [8, 9, 8, 9];
+    sizes.forEach((n, m) => { for (let i = 0; i < n; i++) W.push({meta: m + 1, type:"video", label:`Vídeo ${i + 1}`, title:`Um vídeo de 15 a 25 min do seu barril`, scene: GENERIC_SCENES[i % GENERIC_SCENES.length][0], why: GENERIC_SCENES[i % GENERIC_SCENES.length][1], pos: GENERIC_SCENES[i % GENERIC_SCENES.length][2]}); if (m === 2) for (let j = 0; j < 2; j++) W.push({meta:3, type:"video", label:"Revisão", title:"Rever 3 vídeos já estudados sem legenda"}); if (m === 3) for (let j = 0; j < 4; j++) W.push({meta:4, type:"video", label:"Revisão", title:"Rever vídeos já estudados sem legenda + conversa real"}); });
+  }
+  W.forEach((w, i) => { w.n = i + 1; w.theme = THEMES[i % THEMES.length]; });
+  return W;
+}
+function metaPart(cfg, chunkIdx, weeks){
+  const ws = weeks.filter(w => w.meta === chunkIdx + 1 && w.type !== "rewatch");
+  if (!cfg.serieOn) return "os vídeos desta meta";
+  if (!ws.length) return "esta parte";
+  const subs = [...new Set(ws.map(w => w.sub))];
+  return subs.length === 1 && subs[0] !== "Episódios" ? `a ${subs[0]}` : `os episódios ${ws[0].label} a ${ws[ws.length - 1].label}`;
+}
+/* ---------- utilidades de data ---------- */
+const DOWN = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const pad = n => String(n).padStart(2, "0");
+const key = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const parse = k => { const [y, m, d] = k.split("-").map(Number); return new Date(y, m - 1, d); };
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const mondayOf = d => { const x = new Date(d); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+const today = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+const fmtLong = d => `${DOWN[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]}`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const VIEWS = ["hoje","calendario","metas","anki","metodo","ajustes"];
+
+/* ---------- Supabase (só na sua cópia hospedada) ----------
+   Opção A: preencha url e key abaixo (a chave "anon public" do projeto; nunca a service_role).
+   Opção B: deixe vazio e informe os dois em Ajustes, em cada aparelho (ficam salvos no navegador). */
+const SUPA_FILE = {url: "", key: "", requireLogin: false}; // requireLogin: true = a página só abre depois do login
+const SUPA_LIB = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js";
+function supaCfg(){ try { const c = JSON.parse(localStorage.getItem("guia-supa") || "null"); if (c && c.url && c.key) return c; } catch(e){} return SUPA_FILE.url && SUPA_FILE.key ? SUPA_FILE : null; }
+function gateActive(){ const c = supaCfg(); return !(window.claude && window.claude.use) && !!c && !!(c.requireLogin || SUPA_FILE.requireLogin) && !!sb && !sbUser; }
+let sb = null, sbUser = null, sbChannel = null, sbSaveTimer = null, sbMsg = "";
+function loadScript(src){ return new Promise((res, rej) => { const el = document.createElement("script"); el.src = src; el.onload = res; el.onerror = rej; document.head.appendChild(el); }); }
+async function initSupabase(){
+  const c = supaCfg(); if (!c){ setSync("local"); return; }
+  try { await loadScript(SUPA_LIB); } catch(e){ setSync("local"); $("#sync").textContent = "Não consegui carregar a biblioteca do Supabase (sem internet?). Progresso salvo neste navegador."; return; }
+  try {
+    sb = window.supabase.createClient(c.url, c.key);
+    const { data } = await sb.auth.getSession(); sbUser = data && data.session ? data.session.user : null;
+    sb.auth.onAuthStateChange((ev, sess) => { const u = sess ? sess.user : null; const changed = (u && u.id) !== (sbUser && sbUser.id); sbUser = u; if (changed){ if (sbUser) sbLoad(); else { unsubSb(); setSync("local"); } render(); } });
+    if (sbUser) sbLoad(); else { setSync("supa-out"); render(); }
+    document.addEventListener("visibilitychange", () => { if (!document.hidden && sbUser) sbLoad(); });
+  } catch(e){ sb = null; setSync("local"); }
+}
+async function sbLoad(){
+  try{
+    const { data, error } = await sb.from("progresso").select("data").eq("user_id", sbUser.id).maybeSingle(); if (error) throw error;
+    if (data && data.data){ const push = mergeRemote(data.data); saveLocal(); render(); if (push) sbSave(); } else sbSave();
+    seeded = true; setSync("supa"); subscribeSb();
+  } catch(e){ sbMsg = e.message || ""; setSync("err"); }
+}
+function subscribeSb(){ unsubSb(); try { sbChannel = sb.channel("progresso-" + sbUser.id).on("postgres_changes", {event:"*", schema:"public", table:"progresso", filter:"user_id=eq." + sbUser.id}, payload => { const d = payload.new && payload.new.data; if (d){ const push = mergeRemote(d); saveLocal(); render(); if (push) sbSave(); } }).subscribe(); } catch(e){} }
+function unsubSb(){ if (sbChannel && sb){ try { sb.removeChannel(sbChannel); } catch(e){} sbChannel = null; } }
+function sbSave(){ if (!sb || !sbUser) return; clearTimeout(sbSaveTimer); sbSaveTimer = setTimeout(async () => { try { const body = JSON.parse(JSON.stringify(state)); const { error } = await sb.from("progresso").upsert({user_id: sbUser.id, data: body, updated_at: new Date().toISOString()}); if (error) throw error; setSync("supa"); } catch(e){ sbMsg = e.message || ""; setSync("err"); } }, 600); }
+
+/* ---------- estado ---------- */
+const LS = "guia-ingles-series";
+let state = {start: key(mondayOf(today())), cfg: JSON.parse(JSON.stringify(DEFAULT_CFG)), cfgSaved: false, days: {}, tests: {}, cando: {}};
+try { const raw = localStorage.getItem(LS); if (raw){ const s = JSON.parse(raw); state = Object.assign(state, s); state.cfg = Object.assign({}, DEFAULT_CFG, s.cfg || {}); } } catch(e){}
+let view = "hoje", sel = key(today()), openTest = null, quizPick = {}, calMonth = null;
+let dbRef = null, seeded = false, writing = Promise.resolve(), saveTimer = null, rev = 0;
+let _wk = null, _wkKey = "";
+function WEEKS(){ const k = JSON.stringify(state.cfg); if (k !== _wkKey){ _wk = buildWeeks(state.cfg); _wkKey = k; } return _wk; }
+const metaWeeks = m => WEEKS().filter(w => w.meta === m).map(w => w.n);
+const S = () => state.cfg.serieOn ? state.cfg.serie : "seus vídeos";
+const fill = (txt, m) => txt.replace(/\{S\}/g, S()).replace(/\{P\}/g, metaPart(state.cfg, m - 1, WEEKS()));
+
+function saveLocal(){ try { localStorage.setItem(LS, JSON.stringify(state)); } catch(e){} }
+function setSync(m){
+  $("#sync").textContent = m === "db" ? "Progresso e configuração salvos na sua conta: aparecem em qualquer aparelho." :
+    m === "slow" ? "Ainda não consegui carregar seus dados da conta. Por enquanto, ficam salvos neste navegador." :
+    m === "supa" ? `Sincronizado pelo Supabase como ${sbUser ? sbUser.email : ""}: aparece em qualquer aparelho.` :
+    m === "supa-out" ? "Supabase configurado. Entre na sua conta em Ajustes para sincronizar entre aparelhos." :
+    m === "err" ? `Não consegui salvar na nuvem${sbMsg ? " (" + sbMsg + ")" : ""}. Ficou salvo neste navegador.` : "Progresso salvo neste navegador.";
+}
+function persist(){
+  saveLocal();
+  if (!dbRef){ if (sb && sbUser) sbSave(); return; }
+  clearTimeout(saveTimer);
+  rev++;
+  saveTimer = setTimeout(() => { const body = JSON.parse(JSON.stringify(state)); body.atualizado = new Date().toISOString(); body.rev = rev; writing = writing.then(() => dbRef.set(body)).catch(() => setSync("err")); }, 500);
+}
+async function migrateOld(db, id){
+  try{ const old = await db.doc("data/users/" + id + "/calendario").get(); if (!old.exists) return; const d = old.data() || {};
+    if (d.start) state.start = d.start; if (d.lessons) state.cfg.aulas = d.lessons; if (d.tests) state.tests = Object.assign({}, d.tests, state.tests); if (d.cando) state.cando = Object.assign({}, d.cando, state.cando);
+    for (const k in (d.days || {})){ if (!state.days[k]){ state.days[k] = {t: Array.isArray(d.days[k]) ? d.days[k] : (d.days[k].t || [])}; recompute(k); state.days[k].u = 1; } }
+    saveLocal(); render(); } catch(e){}
+}
+async function initDb(){
+  try{
+    if (!window.claude || !window.claude.use){ setSync("local"); return; }
+    const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    if (!db || !user){ setSync("local"); return; }
+    const id = await user.id(); if (!id){ setSync("local"); return; }
+    dbRef = db.doc("data/users/" + id + "/guia");
+    const timer = setTimeout(() => setSync("slow"), 10000);
+    dbRef.onSnapshot(snap => {
+      if (!snap.metadata.fromCache) clearTimeout(timer);
+      if (snap.exists){ const d = snap.data() || {};
+        const fromMe = snap.metadata.hasPendingWrites || (typeof d.rev === "number" && d.rev <= rev);
+        if (!fromMe || !seeded){ if (typeof d.rev === "number" && d.rev > rev) rev = d.rev; const push = mergeRemote(d); saveLocal(); render(); if (push && seeded) persist(); if (push && !seeded) setTimeout(persist, 1500); }
+        seeded = true; setSync("db"); }
+      else if (!snap.metadata.fromCache){ setSync("db"); if (!seeded){ seeded = true; migrateOld(db, id).then(() => { if (Object.keys(state.days).length || state.cfgSaved) persist(); }); } }
+    }, () => { clearTimeout(timer); dbRef = null; setSync("local"); });
+  } catch(e){ dbRef = null; setSync("local"); }
+}
+
+/* ---------- plano do dia ---------- */
+const T = (t, d, min, k, ess, anki, n) => ({t, d, min, k, ess: !!ess, anki, n: anki ? (n || 2) : 0});
+const ANKI = T("Anki: revisões do dia", "Ouça o áudio antes de ler, leia a frase em voz alta, vire e avalie com honestidade.", 10, "ativo", true);
+function ankiSoFar(d){
+  const out = [], W = WEEKS(), start = parse(state.start); let total = 0;
+  for (let x = start; x < d; x = addDays(x, 1)){ const p = dayPlan(x); if (!p.tasks) continue; const r = rec(key(x)); const s = r ? new Set(r.t) : new Set(); let n = 0; p.tasks.forEach((t, i) => { if (t.anki) n += t.n; }); if (r && typeof r.n === "number") total += r.n; else { let done = 0; p.tasks.forEach((t, i) => { if (t.anki && s.has(i)) done += t.n; }); total += done; } }
+  return total;
+}
+const legendaCurta = m => ["dupla (inglês em cima, português embaixo)", "só em inglês", "inglês nos novos; nenhuma nos já vistos", "inglês nos novos; nenhuma nos já vistos"][m - 1];
+function lesson(n){ const c = state.cfg; return n <= c.aulas ? `Aula ${n} do curso ${c.curso}` : `Rever uma aula do curso ${c.curso} que valha repetir`; }
+function barril(i){ const b = state.cfg.barril.filter(Boolean); return b.length ? b[i % b.length] : "um podcast ou vídeo do seu interesse"; }
+const TESTE = m => T(`Teste da Meta ${m}`, "Abra a aba Metas e testes: faça as 6 questões, grave a fala pedida e cole o prompt no chat com o Claude.", 30, "ativo", true);
+const SAB = (m, last) => last ? [ANKI, TESTE(m), T("Jogo ou série em inglês", "Recompensa pelo teste.", 45, "passivo")] : [ANKI, T("Áudio de algo já estudado enquanto faz outra coisa", "Lavando louça, dirigindo ou na academia. Repetição é o segredo da escuta.", 25, "passivo", true), T("Jogo ou série em inglês", "Lazer, sem obrigação de estudar.", 45, "passivo")];
+const DOM = (next, monthly) => [Object.assign({}, ANKI, {d:"Sem cartões novos hoje: só revisão."}), T("Revisar as lacunas da semana e preparar a próxima", next ? `Semana que vem: ${next.title}. Separe o material.` : "Última semana concluída! Escolha a próxima série em Ajustes.", 15, "ativo", true), ...(monthly ? [T("Monólogo do mês (2 min)", "Fale sobre o mesmo tema de sempre: quem você é, sua semana e o que está assistindo. Compare com o mês anterior.", 10, "ativo", true)] : []), T("Filme ou série livre em inglês", "Lazer com inglês.", 60, "passivo")];
+
+function dayPlan(d){
+  const W = WEEKS(), start = parse(state.start), c = state.cfg;
+  const idx = Math.round((d - start) / 864e5);
+  if (idx < 0) return {before: true};
+  const wi = Math.floor(idx / 7); if (wi >= W.length) return {after: true};
+  const w = W[wi], dow = d.getDay(), meta = METAS[w.meta - 1], next = W[wi + 1];
+  const mw = metaWeeks(w.meta), lastOfMeta = mw[mw.length - 1] === w.n, monthly = w.n % 4 === 0;
+  let tasks = [], label = "", mode = "";
+  const curso = c.cursoOn;
+  const L1 = curso ? T(lesson(2 * w.n - 1), "Assista anotando 3 estruturas prontas. Elas viram cartões hoje.", 15, "ativo", false, `3 estruturas da aula ${2 * w.n - 1}`, 3) : T("Treino de reduções da fala", "Pesquise no YouGlish uma redução (gonna, wanna, gotta, whatcha) e ouça 10 exemplos reais, repetindo.", 15, "ativo", false, "3 frases com a redução", 3);
+  const L2 = curso ? T(lesson(2 * w.n), "Assista anotando 3 estruturas prontas e uma redução de fala.", 15, "ativo", true, `3 estruturas da aula ${2 * w.n}`, 3) : T("Pronúncia e ligações", "Vídeo curto sobre connected speech (busque “connected speech English”) e aplique na cena da semana.", 15, "ativo", true, "3 estruturas do vídeo", 3);
+  const rp = T(`Roleplay por voz: ${w.theme.rp}`, `Tema da semana: ${w.theme.n}. Use o modo de voz da IA com o prompt da aba Método. Anote 3 coisas que você não soube dizer.`, 15, "ativo", true, `2 lacunas do roleplay (${w.theme.n})`, 2);
+  const pod = (min, ess) => T(`Input passivo: ${barril(w.n + dow)}`, "Nos tempos mortos: transporte, academia, tarefas de casa.", min, "passivo", ess);
+  const unit = w.type === "video" ? {noun:"vídeo", watch: T("Assistir o vídeo da semana (15 a 25 min)", `Escolha no seu barril: ${barril(w.n)}. Legenda ${legendaCurta(w.meta)}. Anote 2 ou 3 momentos de fala que você gostou.`, 25, "passivo", true), cena:"do vídeo"} :
+    {noun:"episódio", watch: T(`Assistir ${w.eps[0] ? (c.seasons.length > 1 ? `T${w.eps[0].s}E${w.eps[0].e}` : `E${w.eps[0].e}`) : ""} inteiro: ${w.eps[0] ? w.eps[0].title : ""}`, `Legenda ${legendaCurta(w.meta)}. Sem pausar muito: é lazer com inglês. Anote 2 ou 3 momentos de diálogo que você gostou.`, 55, "passivo", true), cena:"do episódio"};
+  const cenaRef = w.type === "video" ? "do vídeo da semana" : "de " + w.label;
+  const cenaD = `Cena: ${w.scene} Onde: ${w.pos}. `;
+  const second = w.type === "ep" && w.eps[1] ? T(`Assistir ${c.seasons.length > 1 ? `T${w.eps[1].s}E${w.eps[1].e}` : `E${w.eps[1].e}`} inteiro: ${w.eps[1].title}`, `Segundo ${unit.noun} da semana. Legenda ${legendaCurta(w.meta)}.`, 55, "passivo", true) : null;
+
+  if (w.type === "ep" || w.type === "video"){
+    if (dow === 1){ label = "Assistir e escolher a cena"; tasks = [ANKI, unit.watch, L1, T(`Escolher a cena da semana ${w.type === "video" ? "" : "em " + w.label} e ouvir 1x sem legenda`, `Sugestão: ${w.scene} Onde: ${w.pos}. ${w.why} Anote o minuto em que ela começa.`, 10, "ativo"), pod(30)]; }
+    else if (dow === 2){ label = "Escuta intensiva e shadowing"; tasks = [ANKI,
+      T(`Escuta intensiva da cena ${cenaRef}`, cenaD + "Ouça 1x sem legenda, 1x com legenda em inglês. Marque as palavras que você não ouviu e procure as reduções (gonna, wanna, gotta).", 15, "ativo", true, `2 frases da cena ${w.type === "video" ? "" : "de " + w.label} que você não tinha ouvido`, 2),
+      T(`Shadowing da mesma cena ${w.type === "video" ? "" : "de " + w.label}`, "Repita frase por frase imitando ritmo e emoção. Termine com 2 passadas contínuas, meio segundo atrás da voz original. Grave a última.", 15, "ativo", true),
+      T(`Reouvir ${w.type === "video" ? "o vídeo" : w.label} só no áudio`, "Durante uma tarefa de casa ou no carro. Não precisa entender tudo.", 20, "passivo", true),
+      T("Responder 3 perguntas em voz alta", `Who? What happened? What's next? Responda em inglês sobre o ${unit.noun}, gravando.`, 10, "ativo"), pod(30), T("Rever a cena sem legenda", "Só para medir quanto você já pega de ouvido.", 10, "passivo")]; }
+    else if (dow === 3){ label = "Mineração de frases e Anki"; tasks = [ANKI,
+      T(`Sentence mining da cena ${cenaRef}: 5 a 8 frases`, cenaD + "Pare nas frases com só uma palavra nova. Salve com áudio pelo Language Reactor ou monte os cartões no gerador da aba Anki.", 20, "ativo", true, `5 a 8 frases mineradas da cena ${w.type === "video" ? "do vídeo" : "de " + w.label}: os cartões principais da semana`, 6),
+      T("Chorusing das 2 melhores frases mineradas hoje", "Loop na frase, fale junto 20 vezes, até sua voz se encaixar na original.", 10, "ativo", true),
+      ...(second ? [second] : [pod(20, true)]),
+      T(`Rever a cena ${w.type === "video" ? "" : "de " + w.label} com legenda em inglês, sem pausar`, "Perceba o que ficou fácil depois do shadowing.", 10, "passivo"),
+      T(`Vocabulário de viagem: ${w.theme.n}`, "Leia 20 expressões do tema em voz alta no roteiro interativo e ouça a pronúncia.", 10, "ativo"),
+      ...(second ? [] : [T("Episódio, jogo ou vídeo livre em inglês", "Qualquer coisa que você goste, com áudio em inglês.", 40, "passivo")])]; }
+    else if (dow === 4){ label = curso ? "Curso e roleplay de viagem" : "Pronúncia e roleplay de viagem"; tasks = [ANKI, L2, rp, pod(20, true),
+      T(`Caçar na cena ${w.type === "video" ? "" : "de " + w.label} o som da aula`, "Volte à cena da semana e encontre a redução ou a ligação que você estudou. Repita 5 vezes.", 10, "ativo"),
+      T("Fechar as lacunas no YouGlish", "Ouça 3 exemplos reais de cada lacuna e repita a frase certa 3 vezes.", 10, "ativo"), pod(30)]; }
+    else if (dow === 5){ label = `Falar sobre o ${unit.noun}`; tasks = [ANKI,
+      T(`Responder aos personagens na cena ${cenaRef}`, cenaD + "Reveja a cena pausando depois de cada fala e responda em voz alta, como se estivesse lá.", 15, "ativo", true),
+      T(`Resumo gravado de ${w.type === "video" ? "o vídeo" : w.label} (1 a 2 min)`, "Use pelo menos 2 frases mineradas. Guarde a gravação para comparar depois.", 10, "ativo", true),
+      T("Fechar lacunas", "Pesquise o que você não soube dizer e repita a frase certa 3 vezes.", 5, "ativo", true, "2 lacunas do resumo de hoje", 2), pod(20, true),
+      T(`Rever ${w.type === "video" ? "o vídeo" : w.label} no passo seguinte de legenda`, "Se viu com legenda dupla, veja só em inglês; se viu em inglês, tente sem legenda.", w.type === "video" ? 25 : 55, "passivo")]; }
+    else if (dow === 6){ label = lastOfMeta ? `Teste da Meta ${w.meta}` : "Sábado leve"; mode = "leve"; tasks = SAB(w.meta, lastOfMeta); }
+    else { label = "Domingo leve: revisão e preparo"; mode = "leve"; tasks = DOM(next, monthly); }
+  } else {
+    const multi = c.seasons.length > 1, lab = e => (multi ? `T${e.s}E${e.e}` : `E${e.e}`) + `: ${e.title}`;
+    const watch = (e, min) => T(`Rever ${lab(e)} sem legenda`, "Primeiro sem nada. Anote onde você se perdeu. Depois volte só nessas partes com legenda em inglês.", min, "passivo", true);
+    const shadow = T("Shadowing de 1 minuto da cena favorita", "Escolha um trecho que você já conhece e imite a voz original.", 10, "ativo");
+    const eps = w.eps;
+    if (w.meta === 3){
+      if (dow >= 1 && dow <= 4){ const e = eps[(dow - 1) % eps.length]; label = "Rever sem legenda"; tasks = [ANKI, watch(e, 50), Object.assign({}, rp, {min:10}), shadow, pod(30)]; }
+      else if (dow === 5){ label = "Falar: monólogo e roleplay longo"; tasks = [ANKI, T("Monólogo de 3 minutos sobre o que você reviu", "Conte a história em inglês, sem parar. Grave.", 10, "ativo", true), T("Roleplay longo por voz (20 min)", `Tema: ${w.theme.n}. ${w.theme.rp}. Peça correções no final.`, 20, "ativo", true, "3 lacunas do roleplay", 3), pod(20, true), pod(30)]; }
+      else if (dow === 6){ label = lastOfMeta ? `Teste da Meta ${w.meta}` : "Sábado leve"; mode = "leve"; tasks = SAB(w.meta, lastOfMeta); }
+      else { label = "Domingo leve"; mode = "leve"; tasks = DOM(next, monthly); }
+    } else {
+      if (dow === 1){ label = "Rever sem legenda"; tasks = [ANKI, watch(eps[0], 50), shadow, pod(30)]; }
+      else if (dow === 2){ label = "Shadowing e mineração"; tasks = [ANKI, T("Shadowing de uma cena do episódio de ontem", "3 minutos de cena, 2 passadas contínuas, gravando a última.", 15, "ativo", true), T("Minerar 5 frases avançadas", "Procure phrasal verbs, ironia e reduções que você ainda não domina.", 15, "ativo", true, "5 frases avançadas", 5), T("Input passivo com outro sotaque", "Podcast britânico, australiano ou irlandês.", 30, "passivo", true), pod(30)]; }
+      else if (dow === 3){ label = "Rever sem legenda"; tasks = [ANKI, watch(eps[1] || eps[0], 50), shadow, pod(30)]; }
+      else if (dow === 4){ label = "Conversa com uma pessoa real"; tasks = [ANKI, T("Conversa real de 30 min", "Tutor online (Preply, italki), parceiro de idioma (Tandem) ou chat de voz num Discord de jogos em inglês. Fale sobre a série, trabalho ou viagem.", 30, "ativo", true, "3 lacunas da conversa"), pod(20, true), pod(30)]; }
+      else if (dow === 5){ label = "Falar sobre os episódios"; tasks = [ANKI, T("Responder aos personagens nas cenas revistas", "Pause e responda em voz alta.", 15, "ativo", true), T("Resumo gravado (3 min)", "Sem parar, com conectores: because, but, so, although.", 10, "ativo", true), pod(20, true), pod(30)]; }
+      else if (dow === 6){ label = lastOfMeta ? `Teste da Meta ${w.meta}` : "Sábado leve"; mode = "leve"; tasks = SAB(w.meta, lastOfMeta); }
+      else { label = "Domingo leve"; mode = "leve"; tasks = DOM(next, monthly); }
+    }
+  }
+  const essMin = tasks.filter(t => t.ess).reduce((a, t) => a + t.min, 0), allMin = tasks.reduce((a, t) => a + t.min, 0);
+  return {w, meta, dow, label, mode, tasks, essMin, allMin, lastOfMeta, idx};
+}
+const rec = k => state.days[k] || null;
+const doneSet = k => new Set((rec(k) || {}).t || []);
+function recompute(k){
+  const p = dayPlan(parse(k)); const prev = rec(k) || {};
+  if (!p.tasks){ state.days[k] = Object.assign({}, prev, {t:[], lvl:"none", min:0, est:0, u: Date.now()}); return; }
+  const s = doneSet(k);
+  const ess = p.tasks.map((t, i) => t.ess ? i : -1).filter(i => i >= 0);
+  const lvl = !s.size ? "none" : !ess.every(i => s.has(i)) ? "partial" : p.tasks.every((t, i) => s.has(i)) ? "full" : "min";
+  let min = 0, est = 0; p.tasks.forEach((t, i) => { if (s.has(i)){ min += t.min; est += t.n || 0; } });
+  state.days[k] = {t:[...s], lvl, min, est, u: Date.now()}; if (typeof prev.n === "number") state.days[k].n = prev.n;
+}
+const dayStatus = d => { const r = rec(key(d)); return r && r.lvl ? r.lvl : "none"; };
+function mergeRemote(d){
+  let newerLocal = false;
+  const rd = d.days || {};
+  for (const k in rd){ const L = state.days[k], R = rd[k]; if (!L || (R.u || 0) > (L.u || 0)) state.days[k] = R; else if ((L.u || 0) > (R.u || 0)) newerLocal = true; }
+  for (const k in state.days) if (!rd[k]) newerLocal = true;
+  state.tests = Object.assign({}, d.tests || {}, state.tests); state.cando = Object.assign({}, d.cando || {}, state.cando);
+  if ((d.cfgAt || 0) > (state.cfgAt || 0)){ state.cfg = Object.assign({}, DEFAULT_CFG, d.cfg || {}); state.start = d.start || state.start; state.cfgSaved = !!d.cfgSaved; state.cfgAt = d.cfgAt; }
+  else if (!state.cfgAt && d.cfg && !state.cfgSaved){ state.cfg = Object.assign({}, DEFAULT_CFG, d.cfg); state.start = d.start || state.start; state.cfgSaved = !!d.cfgSaved; }
+  else if ((state.cfgAt || 0) > (d.cfgAt || 0)) newerLocal = true;
+  return newerLocal;
+}
+const isDone = d => ["min","full"].includes(dayStatus(d));
+
+/* ---------- estatísticas ---------- */
+function stats(){
+  const t = today(), W = WEEKS();
+  let streak = 0, d = t; if (!isDone(d)) d = addDays(d, -1);
+  while (isDone(d)){ streak++; d = addDays(d, -1); }
+  let minutes = 0, done = 0, cards = 0; for (const k in state.days){ const r = state.days[k]; minutes += r.min || 0; if (["min","full"].includes(r.lvl)) done++; cards += typeof r.n === "number" ? r.n : (r.est || 0); }
+  const start = parse(state.start), curIdx = Math.max(0, Math.min(W.length - 1, Math.floor((t - start) / 864e5 / 7))), curMeta = W[curIdx].meta;
+  const mw = metaWeeks(curMeta);
+  return {streak, hours: minutes / 60, done, cards, curMeta, mDone: countDone(start, mw), mTotal: mw.length * 7, curIdx, total: W.length * 7};
+}
+function countDone(start, weekNums){ let c = 0; for (const n of weekNums) for (let i = 0; i < 7; i++) if (isDone(addDays(start, (n - 1) * 7 + i))) c++; return c; }
+
+/* ---------- render ---------- */
+function renderTop(){
+  const s = stats(), c = state.cfg;
+  $("#lead").textContent = `${WEEKS().length} semanas · ${c.serieOn ? c.serie : "vídeos do seu barril"}${c.cursoOn ? " + " + c.curso : ""} · mínimo de 1 hora por dia, meta de 2 horas, fim de semana leve.`;
+  $("#stStreak").textContent = s.streak; $("#stHours").textContent = (Math.round(s.hours * 10) / 10).toLocaleString("pt-BR") + " h"; $("#stDays").textContent = s.done; $("#stCards").textContent = s.cards;
+  const mp = Math.round(s.mDone / s.mTotal * 100), ap = Math.round(s.done / s.total * 100);
+  $("#metaLbl").textContent = `Meta ${s.curMeta} · ${METAS[s.curMeta - 1].nome} · ${s.mDone} de ${s.mTotal} dias`;
+  $("#metaPct").textContent = mp + "%"; $("#metaBar").style.width = mp + "%";
+  $("#allLbl").textContent = `Caminho até o B2 inicial (${WEEKS().length} semanas)`;
+  $("#allPct").textContent = ap + "%"; $("#allBar").style.width = ap + "%";
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-current", b.dataset.v === view ? "page" : "false"));
+}
+function taskHTML(k, p, i){
+  const t = p.tasks[i], on = doneSet(k).has(i);
+  return `<label class="task ${on ? "done" : ""}"><input type="checkbox" data-k="${k}" data-i="${i}" ${on ? "checked" : ""} aria-label="${esc(t.t)}"><span><span class="tt">${esc(t.t)}</span><span class="td">${esc(t.d)}</span>${t.anki ? `<span class="ta">Anki: ${esc(t.anki)}</span>` : ""}</span><span class="tm">${t.min}<small>min · ${t.k}</small></span></label>`;
+}
+function dayPanel(k){
+  const d = parse(k), p = dayPlan(d);
+  if (p.before) return `<div class="card"><p>Esse dia é anterior ao início do programa (${fmtLong(parse(state.start))}). Mude a data em Ajustes se quiser.</p></div>`;
+  if (p.after) return `<div class="card"><p>O programa atual termina antes desse dia. Em Ajustes, configure a próxima série para continuar.</p></div>`;
+  const st = dayStatus(d), w = p.w, isT = k === key(today());
+  const ess = p.tasks.map((t, i) => t.ess ? i : -1).filter(i => i >= 0), ext = p.tasks.map((t, i) => t.ess ? -1 : i).filter(i => i >= 0);
+  const ankiToday = p.tasks.filter(t => t.anki).map(t => t.anki), r = rec(k) || {}, est = r.est || 0, nVal = typeof r.n === "number" ? r.n : est, soFar = ankiSoFar(d);
+  if (p.tasks[0] && p.tasks[0].t.startsWith("Anki")) p.tasks[0] = Object.assign({}, p.tasks[0], {d: `Revise os cartões que você já criou (cerca de ${soFar} até ontem: estruturas das aulas, frases das cenas e lacunas dos roleplays). ` + p.tasks[0].d});
+  const head = w.type === "ep" ? `${w.label}: ${w.title}` : w.title;
+  const diaSem = ((p.dow + 6) % 7) + 1;
+  const epLine = `<div class="epi"><h4>${w.type === "ep" ? "Episódio da semana (1 por semana): " : ""}${esc(head)}</h4>${w.scene ? `<p><b>Cena da semana:</b> ${esc(w.scene)} <b>Onde:</b> ${esc(w.pos)}.</p><p>${esc(w.why)} A mesma cena serve de terça a sexta.</p>` : `<p>Semana de consolidação: material que você já conhece, sem legenda, mais fala.</p>`}</div>`;
+  return `<h2 class="dayhead">${isT ? "Hoje: " : ""}${fmtLong(d)}</h2>
+  <p class="dayctx"><b>Semana ${w.n} de ${WEEKS().length}, dia ${diaSem} de 7</b> · Meta ${w.meta}: ${esc(p.meta.nome)} · ${esc(p.label)}${p.mode ? " · ritmo leve" : ""}</p>${epLine}
+  <div class="status"><span class="pill ${st === "min" || st === "full" ? "on" : ""}">${st === "full" ? "Dia completo" : st === "min" ? "Mínimo feito: já conta" : st === "partial" ? "Em andamento" : "Ainda não começou"}</span><span class="pill">Mínimo: ${p.essMin} min</span><span class="pill">Completo: ${p.allMin} min</span><span class="pill">Legenda ${esc(legendaCurta(w.meta))}</span></div>
+  <div class="grp"><h3>Essencial <small>${p.mode ? "meta leve do fim de semana" : "o mínimo de 1 hora"}</small></h3>${ess.map(i => taskHTML(k, p, i)).join("")}</div>
+  ${ext.length ? `<div class="grp"><h3>Para fechar o dia <small>${p.mode ? "se sobrar vontade" : "chega perto das 2 horas"}</small></h3>${ext.map(i => taskHTML(k, p, i)).join("")}</div>` : ""}
+  <div class="ankibox"><h4>Anki hoje</h4><p class="note">Até ontem, seu Anki deve ter cerca de <b>${soFar}</b> cartões criados por você (contando o que você marcou). A revisão de hoje é desses cartões.</p>${ankiToday.length ? `<p class="note">Cartões novos para criar hoje (máximo 10 por dia):</p><ul>${ankiToday.map(a => `<li>${esc(a)}</li>`).join("")}</ul>` : `<p class="note">Nenhum cartão novo hoje: só revisão.</p>`}
+  <div class="row" style="margin-top:10px"><label for="nIn" class="note">Cartões que você criou hoje de verdade:</label><input type="number" id="nIn" min="0" max="60" value="${nVal}" data-k="${k}" style="width:80px"><span class="note">(estimativa pelas tarefas: ${est})</span></div></div>`;
+}
+function viewHoje(){
+  const banner = state.cfgSaved ? "" : `<div class="card banner"><p><b>Este guia está configurado para ${esc(state.cfg.serie)}${state.cfg.cursoOn ? " + " + esc(state.cfg.curso) : ""}.</b> Vai estudar com outra série, outro curso ou só com vídeos? Mude em <a href="#ajustes">Ajustes</a>; o calendário se adapta na hora.</p></div>`;
+  return banner + dayPanel(key(today()));
+}
+function viewCalendario(){
+  const t = today(); if (!calMonth) calMonth = new Date(t.getFullYear(), t.getMonth(), 1);
+  const y = calMonth.getFullYear(), m = calMonth.getMonth(), first = new Date(y, m, 1), offset = (first.getDay() + 6) % 7, nDays = new Date(y, m + 1, 0).getDate();
+  let cells = ""; for (let i = 0; i < offset; i++) cells += `<div class="cell out" aria-hidden="true"></div>`;
+  for (let dn = 1; dn <= nDays; dn++){
+    const d = new Date(y, m, dn), k = key(d), p = dayPlan(d), st = dayStatus(d); let lb = "", cls = [];
+    if (p.before || p.after) cls.push("out");
+    else { lb = p.w.type === "ep" ? p.w.label : p.w.type === "video" ? p.w.label : "Revisão"; if (p.dow === 6 && p.lastOfMeta){ lb = `Teste M${p.w.meta}`; cls.push("test"); } if (p.mode) cls.push("wk"); }
+    if (st === "min") cls.push("min"); if (st === "full") cls.push("full"); if (k === key(t)) cls.push("today"); if (k === sel) cls.push("sel");
+    cells += `<button type="button" class="cell ${cls.join(" ")}" data-day="${k}" ${p.before || p.after ? "disabled" : ""} aria-label="${fmtLong(d)}${lb ? ", " + lb : ""}"><span class="n">${dn}</span><span class="lb">${esc(lb)}</span><i class="d"></i></button>`;
+  }
+  return `<div class="calhead"><button class="btn ghost sm" type="button" data-cal="-1" aria-label="Mês anterior">‹</button><h2>${MESES[m][0].toUpperCase() + MESES[m].slice(1)} de ${y}</h2><button class="btn ghost sm" type="button" data-cal="1" aria-label="Próximo mês">›</button></div>
+  <div class="grid">${["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"].map(x => `<div class="dow">${x}</div>`).join("")}${cells}</div>
+  <div class="legend"><span><i style="background:var(--half)"></i>mínimo feito</span><span><i style="background:var(--sun)"></i>dia completo</span><span><i style="background:var(--surface-2);border:1px solid var(--line)"></i>fim de semana leve</span></div>
+  <div id="selPanel">${dayPanel(sel)}</div>`;
+}
+function viewMetas(){
+  const s = stats(), start = parse(state.start);
+  return `<p class="note" style="margin:0 0 14px">Você avança quando consegue fazer o que a meta pede, não quando o calendário manda. O teste de cada meta fica liberado sempre, mas faça no sábado marcado.</p>` + METAS.map(m => {
+    const mw = metaWeeks(m.n); if (!mw.length) return "";
+    const done = countDone(start, mw), total = mw.length * 7, pct = Math.round(done / total * 100), test = state.tests["m" + m.n], cur = s.curMeta === m.n, open = openTest === m.n;
+    const cando = m.cando.map((c, i) => { const ck = "m" + m.n + "c" + i; return `<li><input type="checkbox" data-cando="${ck}" ${state.cando[ck] ? "checked" : ""} id="${ck}"><label for="${ck}">${esc(fill(c, m.n))}</label></li>`; }).join("");
+    let quiz = "";
+    if (open){
+      const pick = quizPick["m" + m.n] || {}, graded = pick.__graded;
+      quiz = `<div class="quiz"><h4 style="font-family:var(--display);margin:0 0 10px">Teste escrito: 6 questões</h4>` + m.quiz.map((q, qi) => `<div class="q"><p>${qi + 1}. ${esc(q.q)}</p>${q.o.map((o, oi) => { const chosen = pick[qi] === oi, cls = graded ? (oi === q.a ? "ok" : chosen ? "bad" : "") : ""; return `<label class="${cls}"><input type="radio" name="q${m.n}_${qi}" data-q="${qi}" data-o="${oi}" data-m="${m.n}" ${chosen ? "checked" : ""} ${graded ? "disabled" : ""}> ${esc(o)}</label>`; }).join("")}${graded ? `<p class="ex">${esc(q.e)}</p>` : ""}</div>`).join("") +
+        (graded ? `<p><b>Resultado: ${pick.__score} de 6.</b> ${pick.__score >= 5 ? "Passou na parte escrita." : "Refaça a semana de revisão e tente de novo no próximo sábado. Errar aqui é informação, não fracasso."}</p>` : `<button class="btn" type="button" data-grade="${m.n}">Corrigir</button>`) +
+        `<h4 style="font-family:var(--display);margin:18px 0 6px">Teste de fala</h4><p>${esc(fill(m.falar, m.n))}</p><h4 style="font-family:var(--display);margin:18px 0 6px">Teste de conversa com o Claude</h4><p class="note">Cole este prompt no chat (de preferência no modo de voz):</p><div class="prompt" id="pr${m.n}">${esc(fill(m.prompt, m.n))}</div><div class="row" style="margin-top:8px"><button class="btn ghost sm" type="button" data-copy="pr${m.n}">Copiar prompt</button></div></div>`;
+    }
+    return `<div class="meta ${cur ? "cur" : ""}"><h3>Meta ${m.n}: ${esc(m.nome)}</h3><p class="ms">${esc(metaPart(state.cfg, m.n - 1, WEEKS()))} · semanas ${mw[0]} a ${mw[mw.length - 1]}${test ? ` · teste escrito: ${test.score}/6 em ${test.date}` : ""}</p>
+    <div class="bar"><i style="width:${pct}%"></i></div><p class="note" style="margin:6px 0 0">${done} de ${total} dias concluídos (${pct}%)</p>
+    <p style="margin:12px 0 4px"><b>Legenda nesta meta:</b> ${esc(m.legenda)}</p><p style="margin:10px 0 0"><b>No final, você consegue:</b></p><ul>${cando}</ul>
+    <button class="btn ${open ? "ghost" : ""}" type="button" data-test="${m.n}">${open ? "Fechar o teste" : `Fazer o teste da Meta ${m.n}`}</button>${quiz}</div>`;
+  }).join("");
+}
+function viewAnki(){
+  const p = dayPlan(today()), ankiToday = p.tasks ? p.tasks.filter(t => t.anki).map(t => t.anki) : [], c = state.cfg;
+  const st = stats(), W = WEEKS(), start = parse(state.start), tk = today();
+  let weeksList = ""; for (let wi = 0; wi <= st.curIdx; wi++){ const w = W[wi]; const items = []; for (let i = 0; i < 7; i++){ const d = addDays(start, wi * 7 + i); if (d > tk) break; const pl = dayPlan(d); if (pl.tasks) pl.tasks.forEach(t => { if (t.anki) items.push(`${DOWN[d.getDay()].slice(0, 3)}: ${t.anki}`); }); } if (items.length) weeksList += `<p style="margin:8px 0 2px"><b>Semana ${w.n} · ${esc(w.label || "")}</b></p><ul style="margin:0 0 6px">${items.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`; }
+  return `<h2 class="sec" style="margin-top:0">Anki hoje</h2><div class="ankibox">${ankiToday.length ? `<ul>${ankiToday.map(a => `<li>${esc(a)}</li>`).join("")}</ul>` : `<p class="note" style="margin:0">Só revisão hoje.</p>`}</div>
+  <h2 class="sec">O que já deve estar no seu Anki (${st.cards} cartões criados até agora)</h2><div class="card">${weeksList || "<p class=\"note\">Ainda nada: os primeiros cartões entram na segunda-feira.</p>"}</div>
+  <h2 class="sec">Configurar uma vez (20 min)</h2><div class="card"><ol>
+   <li>Instale o Anki no computador (gratuito) e crie uma conta no AnkiWeb para sincronizar. No celular: AnkiDroid (Android, gratuito) ou AnkiWeb no navegador (iPhone).</li>
+   <li>Crie 3 baralhos: <b>${esc(c.serieOn ? c.serie : "Vídeos")}</b>, <b>${esc(c.cursoOn ? c.curso : "Pronúncia")}</b> e <b>Viagem</b>. O que vem da série vai no primeiro, as estruturas das aulas no segundo, as lacunas dos roleplays no terceiro. Trocou de série? Crie um baralho novo e deixe o antigo só em revisão.</li>
+   <li>Em cada baralho, defina <b>cartões novos por dia: 4</b> (12 no total) e deixe as revisões sem limite.</li>
+   <li>Instale a extensão Language Reactor no Chrome: ela exporta frases da Netflix e do YouTube com áudio direto para o Anki.</li>
+   <li>Para Stranger Things, há um deck pronto da Temporada 1: <a href="https://glassygaia.gumroad.com/l/english_stranger_things_01">Learn English from Stranger Things: Season 1</a> (A2–B1, pague quanto quiser). Para outras séries, busque “[nome da série] anki deck”; se não houver, o seu deck minerado basta.</li></ol></div>
+  <h2 class="sec">Como é um bom cartão</h2><div class="card"><div class="tablewrap"><table><tr><th>Frente</th><th>Verso</th></tr>
+   <tr><td>Áudio da cena + a frase em inglês com a parte nova em negrito: <i>I <b>keep losing</b> to the final boss.</i></td><td>Só a parte nova, em português: <i>keep + -ing = ficar fazendo</i>. Quem fala e onde, se ajudar.</td></tr>
+   <tr><td>Estrutura da aula: <i>I'm <b>gonna</b> call you later.</i></td><td><i>gonna = going to</i>. Som: “gâna”.</td></tr>
+   <tr><td>Lacuna do roleplay: <i>Could you <b>store my bags</b> until 3 pm?</i></td><td><i>store my bags = guardar minhas malas</i>.</td></tr></table></div>
+   <p class="note" style="margin-top:8px">Sempre frase, nunca palavra solta. Uma coisa nova por cartão. Cartão chato ou inútil: suspenda sem dó.</p></div>
+  <h2 class="sec">Gerador de cartões</h2><div class="card"><p>Uma frase por linha, no formato <span class="kbd">frase em inglês | significado</span>. Copie, cole num arquivo .txt e importe no Anki (Arquivo › Importar), escolhendo o baralho certo.</p>
+  <textarea id="gen" placeholder="I keep losing to the final boss. | keep + -ing = ficar fazendo&#10;Could you store my bags? | guardar minhas malas"></textarea>
+  <div class="row" style="margin-top:8px"><button class="btn" type="button" id="genCopy">Copiar para o Anki</button><span class="note" id="genNote"></span></div></div>
+  <h2 class="sec">Como revisar (10 min por dia)</h2><div class="card"><ol><li>Toque o áudio antes de ler.</li><li>Leia a frase em voz alta imitando o áudio.</li><li>Vire e confira.</li><li>Errou ou hesitou muito? “De novo”. Acertou fácil? “Bom”. Nunca minta para o Anki.</li><li>Revisões acumuladas? Faça só as revisões e zere os novos até voltar a 10 minutos.</li></ol></div>`;
+}
+function viewMetodo(){
+  const c = state.cfg;
+  return `<h2 class="sec" style="margin-top:0">Ativo e passivo: as duas engrenagens</h2><div class="card"><p><b>Ativo (40 min, marcado como “ativo”):</b> atenção total, com pausas, repetição e fala. É onde você transforma som em habilidade: Anki, escuta intensiva, shadowing, mineração, roleplay.</p><p><b>Passivo (o resto, marcado como “passivo”):</b> inglês ocupando momentos que já existem: episódio inteiro, podcast no carro, jogo em inglês, reouvir o episódio lavando louça. Não precisa entender tudo. É o volume que faz a escuta destravar.</p><p><b>1 hora = essencial.</b> Só o essencial todos os dias leva ao B2 em uns 20 meses. <b>2 horas = essencial + fechar o dia:</b> cerca de 12 meses. O calendário marca os dois como vitória, porque constância vale mais que dia perfeito.</p></div>
+  <h2 class="sec">A semana (vale para qualquer série ou vídeo)</h2><div class="card"><div class="tablewrap"><table><tr><th>Dia</th><th>Foco</th><th>Por quê</th></tr>
+  <tr><td>Segunda</td><td>Material inteiro + ${c.cursoOn ? "aula do curso" : "treino de reduções"} + escolher a cena</td><td>Primeiro o prazer e o contexto, depois o detalhe</td></tr>
+  <tr><td>Terça</td><td>Escuta intensiva + shadowing da cena</td><td>Treino de ouvido e boca com o mesmo trecho</td></tr>
+  <tr><td>Quarta</td><td>Mineração de 5 a 8 frases + chorusing</td><td>O que você já entende vira vocabulário ativo</td></tr>
+  <tr><td>Quinta</td><td>${c.cursoOn ? "Aula do curso" : "Pronúncia"} + roleplay de viagem</td><td>A técnica e a fala da vida real</td></tr>
+  <tr><td>Sexta</td><td>Responder aos personagens + resumo gravado</td><td>Produção: você fala sobre o que ouviu</td></tr>
+  <tr><td>Sábado</td><td>Leve: áudio do que já estudou enquanto faz outra coisa</td><td>Repetição sem esforço</td></tr>
+  <tr><td>Domingo</td><td>Leve: Anki, lacunas e preparar a semana</td><td>Fechar o ciclo e abrir o próximo</td></tr></table></div></div>
+  <h2 class="sec">Escada da legenda</h2><div class="card"><ol><li><b>Meta 1:</b> dupla, inglês em cima e português embaixo (Language Reactor).</li><li><b>Meta 2:</b> só inglês; português só ao passar o mouse.</li><li><b>Meta 3:</b> inglês no material novo; nenhuma no já visto.</li><li><b>Meta 4:</b> inglês no novo; os primeiros episódios inteiros sem legenda.</li></ol><p class="note">Regra de ouro: entendeu menos da metade? Volte um degrau por uma semana. É ajuste, não regressão.</p></div>
+  <h2 class="sec">Como escolher a cena da semana</h2><div class="card"><ul><li>2 a 3 minutos, dois ou três personagens, pouca música e nenhuma ação alta.</li><li>De preferência uma cena que você gostou: emoção ajuda a memória.</li><li>O calendário sugere o tipo de cena a cada semana; para Stranger Things, sugere a cena exata.</li><li>A mesma cena serve a semana inteira: terça (escuta e shadowing), quarta (mineração), sexta (responder aos personagens).</li></ul></div>
+  <h2 class="sec">Trocar de série ou de curso</h2><div class="card"><ul><li>Troque em Ajustes a qualquer momento: o calendário recalcula a partir da data de início, mas os dias já marcados continuam contando nas horas e na sequência.</li><li>A hora certa de trocar é no fim de uma meta, depois do teste. No meio de uma meta, só se a série ficou chata: tédio custa mais que uma troca.</li><li>Série nova de nível parecido? Continue na mesma meta. Série bem mais difícil? Volte um degrau na legenda por uma semana.</li><li>Sem série? Desligue a série em Ajustes e o guia passa a usar vídeos de 15 a 25 min do seu barril, com o mesmo ciclo semanal.</li></ul></div>
+  <h2 class="sec">Técnicas, passo a passo</h2><div class="card"><p><b>Escuta intensiva:</b> 1x sem legenda, 1x com legenda em inglês, marcando o que você não ouviu. Procure reduções: gonna, wanna, gotta, kinda, whatcha, lemme.</p><p><b>Shadowing:</b> frase por frase, pausando, imitando ritmo, entonação e emoção. Depois 2 passadas contínuas, meio segundo atrás da voz original. Grave e compare.</p><p><b>Chorusing:</b> uma frase de 3 a 8 segundos em loop; fale junto 20 vezes até sua voz sumir dentro da original.</p><p><b>Sentence mining:</b> salve frases com exatamente uma coisa nova. 5 a 8 por semana bastam.</p><p><b>Responder aos personagens:</b> pause depois de cada fala e responda como se estivesse na cena. Toda vez que travar, anote a lacuna.</p><p><b>Roleplay por voz:</b> cole este prompt no modo de voz da IA e troque o cenário pelo do dia:</p>
+  <div class="prompt" id="prRp">You are role-playing with me for English practice. I'm a Brazilian learner at A2/B1 level. Scenario: [cenário do dia]. Play the other person, speak naturally but not too fast, and stay in character. After about 10 exchanges, stop and give me: 3 mistakes I made with corrections, 3 more natural phrases I could have used, and one thing I did well.</div><div class="row" style="margin-top:8px"><button class="btn ghost sm" type="button" data-copy="prRp">Copiar prompt</button></div></div>
+  <h2 class="sec">Ritmo e constância</h2><div class="card"><ul><li><b>Horário fixo, gatilho fixo:</b> os 40 min ativos sempre no mesmo lugar do dia.</li><li><b>Nunca zere o dia:</b> num dia ruim, só o Anki e uma escuta da cena. Marque o que fez.</li><li><b>Nunca falhe dois dias seguidos.</b></li><li><b>Fim de semana é leve de propósito:</b> 25 a 35 minutos já contam como dia feito.</li><li><b>Regra do próximo episódio:</b> só assista o próximo depois de estudar uma cena do atual.</li><li><b>Ficou uma semana parado?</b> Volte pelo dia mínimo, sem tentar compensar tudo de uma vez.</li></ul></div>`;
+}
+function viewAjustes(){
+  const c = state.cfg, W = WEEKS();
+  return `<h2 class="sec" style="margin-top:0">O que você está estudando agora</h2>
+  <div class="card"><div class="row" style="margin-bottom:10px"><button class="btn ghost sm" type="button" id="presetST">Usar Stranger Things (5 temporadas)</button></div>
+   <label class="toggle"><input type="checkbox" id="serieOn" ${c.serieOn ? "checked" : ""}> Estudar com uma série</label>
+   <div id="serieFields" style="${c.serieOn ? "" : "display:none"}">
+   <p style="margin:12px 0 4px"><b>Nome da série</b></p><input type="text" id="serieIn" value="${esc(c.serie)}" style="width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)">
+   <p style="margin:12px 0 4px"><b>Episódios por temporada</b> <span class="note">(separe por vírgula: 8, 9, 8)</span></p><input type="text" id="seasonsIn" value="${c.seasons.join(", ")}" style="width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)">
+   <p style="margin:12px 0 4px"><b>Episódios por semana</b></p><select id="epwIn" style="border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><option value="1" ${c.epw !== 2 ? "selected" : ""}>1 (episódios de 40 a 70 min)</option><option value="2" ${c.epw === 2 ? "selected" : ""}>2 (episódios curtos, de 20 a 30 min)</option></select>
+   <p style="margin:12px 0 4px"><b>Títulos dos episódios</b> <span class="note">(opcional; um por linha, na ordem)</span></p><textarea id="titlesIn" placeholder="Pilot&#10;Diversity Day&#10;...">${esc(c.titlesText || "")}</textarea>
+   </div></div>
+  <div class="card"><label class="toggle"><input type="checkbox" id="cursoOn" ${c.cursoOn ? "checked" : ""}> Estudar com um curso</label>
+   <div id="cursoFields" style="${c.cursoOn ? "" : "display:none"}"><p style="margin:12px 0 4px"><b>Nome do curso</b></p><input type="text" id="cursoIn" value="${esc(c.curso)}" style="width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)">
+   <p style="margin:12px 0 4px"><b>Quantas aulas?</b> <span class="note">Entram às segundas e quintas, duas por semana. Depois da última, viram revisão.</span></p><input type="number" id="aulasIn" min="1" max="400" value="${c.aulas}"></div></div>
+  <div class="card"><p><b>Seu barril</b> <span class="note">(podcasts, canais e vídeos para os tempos mortos; um por linha. Eles rodam nas tarefas passivas.)</span></p><textarea id="barrilIn">${esc(c.barril.join("\n"))}</textarea></div>
+  <div class="card"><p><b>Início do programa</b> <span class="note">(sempre uma segunda-feira; outras datas são ajustadas para a segunda da mesma semana)</span></p><div class="row"><input type="date" id="startIn" value="${state.start}"><button class="btn ghost sm" type="button" id="startNow">Recomeçar na segunda desta semana</button></div>
+   <p class="note" style="margin-top:8px">Hoje você está na semana ${stats().curIdx + 1} de ${W.length}. Os dias já marcados continuam contando nas horas e na sequência.</p></div>
+  <div class="row" style="margin:6px 0 20px"><button class="btn" type="button" id="cfgSave">Salvar e recalcular o calendário</button><span class="note" id="cfgNote"></span></div>
+  <h2 class="sec">Sincronização pelo Supabase (cópia hospedada)</h2>
+  ${supaCard()}
+  <h2 class="sec">Backup e sua própria cópia</h2>
+  <div class="card"><p><b>Como o salvamento funciona:</b> dentro do claude.ai, o progresso fica na sua conta e aparece em qualquer aparelho. Numa cópia hospedada por você, fica no navegador de cada aparelho. Para levar o progresso de um lugar para outro, exporte aqui e importe lá.</p>
+  <div class="row" style="margin:8px 0"><button class="btn sm" type="button" id="expBtn">Exportar progresso</button><button class="btn ghost sm" type="button" id="impBtn">Importar o texto abaixo</button><span class="note" id="ioNote"></span></div>
+  <textarea id="ioBox" placeholder="O texto exportado aparece aqui. Para importar, cole o texto de outro aparelho e clique em Importar."></textarea></div>
+  <div class="card"><p><b>Zerar progresso</b></p><button class="btn ghost sm" type="button" id="resetAll">Desmarcar todos os dias e testes</button></div>`;
+}
+let toastT = null;
+function toast(msg){ let el = $("#toast"); if (!el){ el = document.createElement("div"); el.id = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); } el.textContent = msg; el.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove("on"), 1800); }
+function supaCard(){
+  const inClaude = !!(window.claude && window.claude.use), c = supaCfg();
+  const cfgForm = `<p style="margin:10px 0 4px"><b>Projeto</b> <span class="note">(Project URL e chave anon public, em Project Settings › API)</span></p>
+    <div class="row"><input type="url" id="supaUrl" placeholder="https://xxxx.supabase.co" value="${esc(c ? c.url : "")}" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><input type="password" id="supaKey" placeholder="chave anon public" value="${esc(c ? c.key : "")}" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><button class="btn sm" type="button" id="supaSaveCfg">Salvar e recarregar</button></div>
+    <label class="toggle" style="margin-top:10px;font-weight:400"><input type="checkbox" id="supaReq" ${c && (c.requireLogin || SUPA_FILE.requireLogin) ? "checked" : ""}> Exigir login para usar esta cópia (a página só abre depois de entrar)</label>`;
+  if (inClaude) return `<div class="card"><p>Dentro do claude.ai o progresso já sincroniza pela sua conta Claude. O Supabase serve para a cópia que você hospeda (GitHub Pages, Netlify ou o seu próprio servidor). Abra essa cópia e configure lá.</p></div>`;
+  if (!c) return `<div class="card"><p>Com um projeto Supabase, o progresso desta cópia sincroniza entre seus aparelhos. Siga os passos do chat para criar a tabela e depois preencha aqui.</p>${cfgForm}</div>`;
+  if (!sb) return `<div class="card"><p class="note">Carregando o Supabase…</p>${cfgForm}</div>`;
+  if (!sbUser) return `<div class="card"><p><b>Entrar</b></p><div class="row"><input type="email" id="supaEmail" placeholder="seu e-mail" autocomplete="email" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"><input type="password" id="supaPass" placeholder="senha (mín. 6)" autocomplete="current-password" style="flex:1 1 160px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)"></div>
+    <div class="row" style="margin-top:8px"><button class="btn sm" type="button" id="supaIn">Entrar</button><button class="btn ghost sm" type="button" id="supaUp">Criar conta</button><button class="btn ghost sm" type="button" id="supaMagic">Entrar por link no e-mail</button><span class="note" id="supaNote"></span></div>
+    <details style="margin-top:12px"><summary class="note">Trocar o projeto</summary>${cfgForm}</details></div>`;
+  return `<div class="card"><p>Conectado como <b>${esc(sbUser.email || "")}</b>. Tudo que você marca aqui aparece nos outros aparelhos em que entrar com essa conta.</p><div class="row"><button class="btn ghost sm" type="button" id="supaOut">Sair</button><button class="btn ghost sm" type="button" id="supaRefresh">Buscar atualizações agora</button><span class="note" id="supaNote"></span></div>
+    <details style="margin-top:12px"><summary class="note">Trocar o projeto</summary>${cfgForm}</details></div>`;
+}
+function render(){ if (gateActive()){ renderTop(); $("#view").innerHTML = `<h2 class="sec" style="margin-top:0">Entre para usar o guia</h2><p class="note" style="margin:0 0 12px">Esta cópia exige login. Seu progresso fica na sua conta e aparece em qualquer aparelho.</p>${supaCard()}`; return; } renderTop(); $("#view").innerHTML = view === "hoje" ? viewHoje() : view === "calendario" ? viewCalendario() : view === "metas" ? viewMetas() : view === "anki" ? viewAnki() : view === "metodo" ? viewMetodo() : viewAjustes(); }
+function go(v, push){ view = v; if (push && location.hash !== "#" + v) location.hash = v; render(); window.scrollTo({top: 0}); }
+function readCfg(){
+  const c = Object.assign({}, state.cfg);
+  c.serieOn = $("#serieOn").checked; c.cursoOn = $("#cursoOn").checked;
+  c.serie = ($("#serieIn").value || "Minha série").trim();
+  const seasons = $("#seasonsIn").value.split(/[,;\s]+/).map(Number).filter(n => n > 0 && n < 200); c.seasons = seasons.length ? seasons : [8];
+  c.epw = Number($("#epwIn").value) === 2 ? 2 : 1; c.titlesText = $("#titlesIn").value;
+  c.curso = ($("#cursoIn").value || "Curso").trim(); c.aulas = Math.max(1, Number($("#aulasIn").value) || 40);
+  c.barril = $("#barrilIn").value.split("\n").map(x => x.trim()).filter(Boolean);
+  return c;
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener("click", e => {
+  const tab = e.target.closest(".tab"); if (tab){ go(tab.dataset.v, true); return; }
+  const a = e.target.closest('a[href="#ajustes"]'); if (a){ e.preventDefault(); go("ajustes", true); return; }
+  const cal = e.target.closest("[data-cal]"); if (cal){ calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + Number(cal.dataset.cal), 1); render(); return; }
+  const cell = e.target.closest(".cell[data-day]"); if (cell && !cell.disabled){ sel = cell.dataset.day; render(); const p = $("#selPanel"); if (p) p.scrollIntoView({block:"start", behavior:"smooth"}); return; }
+  const tb = e.target.closest("[data-test]"); if (tb){ const n = Number(tb.dataset.test); openTest = openTest === n ? null : n; render(); return; }
+  const gr = e.target.closest("[data-grade]"); if (gr){ const n = Number(gr.dataset.grade), pick = quizPick["m" + n] || {}; let sc = 0; METAS[n - 1].quiz.forEach((q, i) => { if (pick[i] === q.a) sc++; }); pick.__graded = true; pick.__score = sc; quizPick["m" + n] = pick; state.tests["m" + n] = {score: sc, date: fmtLong(today()).split(", ")[1]}; persist(); render(); return; }
+  const cp = e.target.closest("[data-copy]"); if (cp){ const t = document.getElementById(cp.dataset.copy).textContent; const ok = () => { cp.textContent = "Copiado"; setTimeout(() => cp.textContent = "Copiar prompt", 1800); }; if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, () => cp.textContent = "Selecione e copie"); else cp.textContent = "Selecione e copie"; return; }
+  if (e.target.id === "genCopy"){ const lines = $("#gen").value.split("\n").map(l => l.trim()).filter(Boolean), bad = lines.filter(l => !l.includes("|")); if (!lines.length){ $("#genNote").textContent = "Escreva pelo menos uma linha."; return; } if (bad.length){ $("#genNote").textContent = `${bad.length} linha(s) sem o separador |.`; return; } const tsv = lines.map(l => l.split("|").map(x => x.trim()).join("\t")).join("\n"); const ok = () => $("#genNote").textContent = `${lines.length} cartão(ões) copiado(s). Cole num .txt e importe no Anki.`; if (navigator.clipboard) navigator.clipboard.writeText(tsv).then(ok, () => $("#genNote").textContent = "Não consegui copiar: selecione o texto manualmente."); return; }
+  if (e.target.id === "presetST"){ $("#serieOn").checked = true; $("#serieFields").style.display = ""; $("#serieIn").value = "Stranger Things"; $("#seasonsIn").value = "8, 9, 8, 9, 8"; $("#epwIn").value = "1"; $("#titlesIn").value = ""; return; }
+  if (e.target.id === "startNow"){ $("#startIn").value = key(mondayOf(today())); return; }
+  if (e.target.id === "cfgSave"){ state.cfg = readCfg(); const v = $("#startIn").value; if (v) state.start = key(mondayOf(parse(v))); state.cfgSaved = true; state.cfgAt = Date.now(); Object.keys(state.days).forEach(k => { const r = state.days[k]; if (r && !r.lvl) recompute(k); }); persist(); render(); $("#cfgNote").textContent = `Pronto: ${WEEKS().length} semanas recalculadas.`; return; }
+  if (e.target.id === "supaSaveCfg"){ const url = ($("#supaUrl").value || "").trim(), k = ($("#supaKey").value || "").trim(); if (!url || !k){ alert("Preencha a URL do projeto e a chave anon."); return; } try { localStorage.setItem("guia-supa", JSON.stringify({url, key: k, requireLogin: !!($("#supaReq") && $("#supaReq").checked)})); } catch(err){} location.reload(); return; }
+  if (e.target.id === "supaIn" || e.target.id === "supaUp" || e.target.id === "supaMagic"){ const email = ($("#supaEmail").value || "").trim(), pass = $("#supaPass").value || "", note = $("#supaNote"); if (!email){ note.textContent = "Digite seu e-mail."; return; }
+    (async () => { try { note.textContent = "Aguarde…";
+      if (e.target.id === "supaMagic"){ const { error } = await sb.auth.signInWithOtp({email, options:{emailRedirectTo: location.href.split("#")[0]}}); if (error) throw error; note.textContent = "Link enviado: abra o e-mail neste aparelho."; return; }
+      if (pass.length < 6){ note.textContent = "A senha precisa ter pelo menos 6 caracteres."; return; }
+      if (e.target.id === "supaUp"){ const { data, error } = await sb.auth.signUp({email, password: pass}); if (error) throw error; note.textContent = data.session ? "Conta criada e conectada." : "Conta criada: confirme no e-mail e depois clique em Entrar."; return; }
+      const { error } = await sb.auth.signInWithPassword({email, password: pass}); if (error) throw error; note.textContent = "Conectado.";
+    } catch(err){ note.textContent = "Erro: " + (err.message || err); } })(); return; }
+  if (e.target.id === "supaOut"){ sb.auth.signOut(); return; }
+  if (e.target.id === "supaRefresh"){ sbLoad().then(() => { const n = $("#supaNote"); if (n) n.textContent = "Atualizado."; }); return; }
+  if (e.target.id === "resetAll"){ if (confirm("Zerar todos os dias marcados e os testes?")){ const u = Date.now(); for (const k in state.days) state.days[k] = {t:[], lvl:"none", min:0, est:0, u}; state.tests = {}; state.cando = {}; persist(); render(); } return; }
+  if (e.target.id === "expBtn"){ const txt = JSON.stringify(state); $("#ioBox").value = txt; try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], {type:"application/json"})); a.download = "guia-ingles-progresso.json"; document.body.appendChild(a); a.click(); a.remove(); } catch(err){} if (navigator.clipboard) navigator.clipboard.writeText(txt).then(() => $("#ioNote").textContent = "Copiado. Se o download não abriu, cole o texto num arquivo .json.", () => $("#ioNote").textContent = "Selecione o texto da caixa e copie."); return; }
+  if (e.target.id === "impBtn"){ try { const d = JSON.parse($("#ioBox").value); if (!d || typeof d !== "object") throw 0; const push = mergeRemote(d); if (d.days) for (const k in d.days) if (!state.days[k]) state.days[k] = d.days[k]; persist(); render(); $("#ioNote").textContent = "Importado: o mais recente de cada dia foi mantido."; } catch(err){ $("#ioNote").textContent = "Não consegui ler esse texto. Cole o conteúdo exportado inteiro."; } return; }
+});
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.matches(".task input")){ const k = t.dataset.k, i = Number(t.dataset.i), s = doneSet(k), prev = rec(k) || {}; t.checked ? s.add(i) : s.delete(i); state.days[k] = Object.assign({}, prev, {t:[...s]}); recompute(k); persist(); render(); toast((t.checked ? "Marcado: " : "Desmarcado: ") + t.getAttribute("aria-label")); return; }
+  if (t.id === "nIn"){ const k = t.dataset.k; const r = rec(k) || {t:[]}; r.n = Math.max(0, Number(t.value) || 0); state.days[k] = r; recompute(k); if (!state.days[k]) state.days[k] = {t:[], lvl:"partial", min:0, est:0, n:r.n}; persist(); renderTop(); return; }
+  if (t.dataset.cando){ state.cando[t.dataset.cando] = t.checked; persist(); return; }
+  if (t.dataset.q !== undefined && t.dataset.m){ const m = "m" + t.dataset.m; quizPick[m] = quizPick[m] || {}; quizPick[m][Number(t.dataset.q)] = Number(t.dataset.o); return; }
+  if (t.id === "serieOn"){ $("#serieFields").style.display = t.checked ? "" : "none"; return; }
+  if (t.id === "cursoOn"){ $("#cursoFields").style.display = t.checked ? "" : "none"; return; }
+});
+window.addEventListener("hashchange", () => { const v = location.hash.slice(1); if (VIEWS.includes(v) && v !== view) go(v, false); });
+(function start(){ const v = location.hash.slice(1); if (VIEWS.includes(v)) view = v; render(); setSync("local"); if (window.claude && window.claude.use) initDb(); else initSupabase(); })();
+
+</script>
+</body>
+</html>
